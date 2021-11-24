@@ -73,7 +73,7 @@ namespace CodeRorver {
 
     	if(direction==CodeRoverDriveDirection.Forward){
     		//right side clockwise 
-    		pins.analogWritePin(AnalogPin.P0, Math.round(1023*speed/100));
+    		pins.analogWritePin(AnalogPin.P0, Math.round(1023-1023*speed/100));
 			pins.digitalWritePin(DigitalPin.P6, 1);
 			//left side counter-clockwise
 			pins.analogWritePin(AnalogPin.P1, Math.round(1023*speed/100));
@@ -82,9 +82,9 @@ namespace CodeRorver {
 			//then stop 
 			basic.pause(duration);
 			pins.analogWritePin(AnalogPin.P0, 0);
-			pins.digitalWritePin(DigitalPin.P6, 1);
+			pins.digitalWritePin(DigitalPin.P6, 0);
 			pins.analogWritePin(AnalogPin.P1, 0);
-			pins.digitalWritePin(DigitalPin.P7, 1);
+			pins.digitalWritePin(DigitalPin.P7, 0);
 			basic.pause(1);
     		
     	}
