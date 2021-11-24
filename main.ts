@@ -76,47 +76,25 @@ namespace CodeRorver {
     //% expandableArgumentMode="enabled"
     export function setLeftMotorSpeed(direction: MotorShaftDirection,speed: number,duration: number) {
     	led.enable(false);
-    	pins.analogWritePin(AnalogPin.P1, 500);
-    	basic.pause(1)
-		pins.digitalWritePin(DigitalPin.P7, 1);
 
-		// basic.pause(1)
-		// pins.analogWritePin(AnalogPin.P1, 500);
-  //   	basic.pause(1)
-		// pins.digitalWritePin(DigitalPin.P7, 0);
+    	if(direction==MotorShaftDirection.Clockwise){
+    		pins.analogWritePin(AnalogPin.P1, 1023-Math.round(1023*speed/100));
+			pins.digitalWritePin(DigitalPin.P7, 1);
 
-		basic.pause(duration);
+			basic.pause(duration);
 
-		pins.analogWritePin(AnalogPin.P1, 1023);
-		basic.pause(1)
-		pins.digitalWritePin(DigitalPin.P7, 1);
+			pins.analogWritePin(AnalogPin.P1, 1023);
+			pins.digitalWritePin(DigitalPin.P7, 1);
+    	}
+    	else if(direction==MotorShaftDirection.CounterClockwise){
+    		pins.analogWritePin(AnalogPin.P1, 1023-Math.round(1023*speed/100));
+			pins.digitalWritePin(DigitalPin.P7, 0);
 
+			basic.pause(duration);
 
-
-		// basic.pause(1)
-		// pins.analogWritePin(AnalogPin.P1, 1023);
-  //   	basic.pause(1)
-		// pins.digitalWritePin(DigitalPin.P7, 0);
-
-
-   //  	if(direction==MotorShaftDirection.Clockwise){
-   //  		pins.analogWritePin(AnalogPin.P0, 1023-Math.round(1023*speed/100));
-			// pins.digitalWritePin(DigitalPin.P6, 0);
-
-			// basic.pause(duration);
-
-			// pins.analogWritePin(AnalogPin.P0, 1023);
-			// pins.digitalWritePin(DigitalPin.P6, 0);
-   //  	}
-   //  	else if(direction==MotorShaftDirection.CounterClockwise){
-   //  		pins.analogWritePin(AnalogPin.P0, 1023-Math.round(1023*speed/100));
-			// pins.digitalWritePin(DigitalPin.P6, 1);
-
-			// basic.pause(duration);
-
-			// pins.analogWritePin(AnalogPin.P0, 1023);
-			// pins.digitalWritePin(DigitalPin.P6, 0);
-   //  	}
+			pins.analogWritePin(AnalogPin.P1, 1023);
+			pins.digitalWritePin(DigitalPin.P7, 0);
+    	}
     }
 
 
@@ -135,11 +113,27 @@ namespace CodeRorver {
     //% duration.shadow=timePicker
     //% speed.min=0 speed.max=100
     //% expandableArgumentMode="enabled"
-    export function setRightMotorSpeed(
-        direction: MotorShaftDirection,
-        speed: number,
-        duration: number) {
+    export function setRightMotorSpeed(direction: MotorShaftDirection,speed: number,duration: number) {
+    	led.enable(false);
 
+    	if(direction==MotorShaftDirection.Clockwise){
+    		pins.analogWritePin(AnalogPin.P0, 1023-Math.round(1023*speed/100));
+			pins.digitalWritePin(DigitalPin.P6, 0);
+
+			basic.pause(duration);
+
+			pins.analogWritePin(AnalogPin.P0, 1023);
+			pins.digitalWritePin(DigitalPin.P6, 0);
+    	}
+    	else if(direction==MotorShaftDirection.CounterClockwise){
+    		pins.analogWritePin(AnalogPin.P0, 1023-Math.round(1023*speed/100));
+			pins.digitalWritePin(DigitalPin.P6, 1);
+
+			basic.pause(duration);
+
+			pins.analogWritePin(AnalogPin.P0, 1023);
+			pins.digitalWritePin(DigitalPin.P6, 1);
+    	}
     }
 
 
