@@ -12,12 +12,24 @@
 */
 
 	enum MotorChoice {
-	    //% block="leftMotor"
-	    LeftMotor,
-	    //% block="rightMotor"
-	    RightMotor,
-	    //% block="both"
-	    Both,
+	    //% block="left"
+	    Left,
+	    //% block="right"
+	    Right,
+	}
+
+	enum CodeRoverTurnDirection{
+		//% block="left"
+	    Left,
+	    //% block="right"
+	    Right,
+	}
+
+	enum CodeRoverDriveDirection{
+		//% block="forward"
+	    Forward,
+	    //% block="backward"
+	    Backward,
 	}
 
 	enum MotorShaftDirection {
@@ -33,31 +45,64 @@
 //% groups="['Motor Controls','Sensor Controls']"
 namespace CodeRorver {
 
-	// Use inlineInputMode=inline to force inputs to appear
-    // on a single line
+    /**
+     * Set the motor speed and direction
+     * @param direction to perform the spin, eg: left
+     * @param degree need to turn, eg: 45
+     */
+    //% block="Turn %degree degrees to the %turnChoice"
+    //% degree.min=0 degree.max=360
+   	//% group="Motor Controls"
+    export function CodeRoverTurn(degree : number, turnChoice: CodeRoverTurnDirection) {
 
-    // Use expandableArgumentMode=enabeled to collapse or
-    // expand EACH input parameter
+    }
+
 
     /**
      * Set the motor speed and direction
-     * @param directon to turn the motor shaft in,
-     *      eg: MotorShaftDirection.Clockwise
-     * @param speed of the motor in RPM, eg: 30
-     * @param duration in milliseconds to run the
-     *      motor the alarm sound, eg: 2000
+     * @param direction to drive, eg: forward
+     * @param drive speed percentage, eg: 50
+     * @param drive duration, eg: 500
      */
-    //% block="%motorChoice run|| %direction|at %speed |for %duration ms"
-   	//% group="Motor Controls"
+    //% block="Drive %direction at %speed for %duration ms"
     //% duration.shadow=timePicker
     //% speed.min=0 speed.max=100
-    //% expandableArgumentMode="enabled"
-    export function setMotorSpeed(
-    	motorChoice : MotorChoice,
-        direction: MotorShaftDirection,
-        speed: number,
-        duration: number) {
+   	//% group="Motor Controls"
+    export function CodeRoverDrive(direction : CodeRoverDriveDirection, speed:number, duration: number) {
+    	led.enable(false);
 
+    	if(direction==CodeRoverDriveDirection.Forward){
+    		//right side clockwise 
+    		pins.analogWritePin(AnalogPin.P0, 1023-Math.round(1023*speed/100));
+			pins.digitalWritePin(DigitalPin.P6, 1);
+			//left side counter-clockwise
+			pins.analogWritePin(AnalogPin.P1, 1023-Math.round(1023*speed/100));
+			pins.digitalWritePin(DigitalPin.P7, 0);
+
+			//then stop 
+			basic.pause(duration);
+			pins.analogWritePin(AnalogPin.P0, 1023);
+			pins.digitalWritePin(DigitalPin.P6, 1);
+			pins.analogWritePin(AnalogPin.P1, 1023);
+			pins.digitalWritePin(DigitalPin.P7, 1);
+    		
+    	}
+    	else if(direction==CodeRoverDriveDirection.Backward){
+    		//right side counter-clockwise
+    		pins.analogWritePin(AnalogPin.P0, 1023-Math.round(1023*speed/100));
+			pins.digitalWritePin(DigitalPin.P6, 0);
+			//left side clockwise
+			pins.analogWritePin(AnalogPin.P1, 1023-Math.round(1023*speed/100));
+			pins.digitalWritePin(DigitalPin.P7, 1);
+
+
+    		//then stop 
+			basic.pause(duration);
+			pins.analogWritePin(AnalogPin.P0, 1023);
+			pins.digitalWritePin(DigitalPin.P6, 1);
+			pins.analogWritePin(AnalogPin.P1, 1023);
+			pins.digitalWritePin(DigitalPin.P7, 1);
+    	}
     }
 
 
@@ -104,7 +149,7 @@ namespace CodeRorver {
      * Set the right motor speed and direction
      * @param directon to turn the right motor shaft in,
      *      eg: MotorShaftDirection.Clockwise
-     * @param speed of the motor in percentage, eg: 30%
+     * @param speed of the motor in percentage, eg: 30
      * @param duration in milliseconds to run the
      *      motor the alarm sound, eg: 2000
      */
