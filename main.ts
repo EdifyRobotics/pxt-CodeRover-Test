@@ -1,8 +1,22 @@
+/** 
+ * @file pxt-CodeRover-Test/main.ts
+ * @brief EdifyRobitics' CodeRover makecode library.
+ * @n [You may purchase CodeRover kit here]()
+ * @n Programmable robot platforms for Micro:Bit.
+ * 
+ * @copyright    [EdifyRobotics](http://www.edifyrobotics.com), 2021
+ * @copyright    MIT Lesser General Public License
+ * 
+ * @author [email](tony_ying@edifyrobotics.com)
+ * @date  Nov/24/2021
+*/
+
+
 /**
  * Events are functions that take a function (lambda) as the last argument
  */
-//% color="#AA278D"
-namespace language {
+//% color="#FEC700"
+namespace CodeRorver {
     /**
      * A simple event taking a function handler
      */
