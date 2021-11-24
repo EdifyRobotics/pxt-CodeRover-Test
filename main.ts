@@ -75,7 +75,6 @@ namespace CodeRorver {
     		//right side clockwise 
     		pins.analogWritePin(AnalogPin.P0, 1023-Math.round(1023*speed/100));
 			pins.digitalWritePin(DigitalPin.P6, 1);
-			basic.pause(1);
 			//left side counter-clockwise
 			pins.analogWritePin(AnalogPin.P1, 1023-Math.round(1023*speed/100));
 			pins.digitalWritePin(DigitalPin.P7, 0);
@@ -93,7 +92,6 @@ namespace CodeRorver {
     		//right side counter-clockwise
     		pins.analogWritePin(AnalogPin.P0, 1023-Math.round(1023*speed/100));
 			pins.digitalWritePin(DigitalPin.P6, 0);
-			basic.pause(1);
 			//left side clockwise
 			pins.analogWritePin(AnalogPin.P1, 1023-Math.round(1023*speed/100));
 			pins.digitalWritePin(DigitalPin.P7, 1);
