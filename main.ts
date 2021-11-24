@@ -12,10 +12,10 @@
 */
 
 	enum MotorChoice {
-	    //% block="left"
-	    Left,
-	    //% block="right"
-	    Right,
+	    //% block="leftMotor"
+	    LeftMotor,
+	    //% block="rightMotor"
+	    RightMotor,
 	    //% block="both"
 	    Both,
 	}
@@ -52,7 +52,6 @@ namespace CodeRorver {
 
 
 
-	//% group="Motor Controls"
 
 
 	// Use inlineInputMode=inline to force inputs to appear
@@ -70,12 +69,71 @@ namespace CodeRorver {
      * @param duration in milliseconds to run the
      *      motor the alarm sound, eg: 2000
      */
-    //% block="set the %motorChoice to run || %direction|at %speed |for %duration ms"
+    //% block="%motorChoice run|| %direction|at %speed |for %duration ms"
+   	//% group="Motor Controls"
     //% duration.shadow=timePicker
     //% speed.min=0 speed.max=100
     //% expandableArgumentMode="enabled"
     export function setMotorSpeed(
     	motorChoice : MotorChoice,
+        direction: MotorShaftDirection,
+        speed: number,
+        duration: number) {
+
+    }
+
+    /**
+     * Set the left motor speed and direction
+     * @param directon to turn the left motor shaft in,
+     *      eg: MotorShaftDirection.Clockwise
+     * @param speed of the motor in percentage, eg: 30%
+     * @param duration in milliseconds to run the
+     *      motor the alarm sound, eg: 2000
+     */
+    //% block="Left motor run|| %direction|at %speed |for %duration ms"
+    //% group="Motor Controls"
+    //% duration.shadow=timePicker
+    //% speed.min=0 speed.max=100
+    //% expandableArgumentMode="enabled"
+    export function setLeftMotorSpeed(direction: MotorShaftDirection,speed: number,duration: number) {
+    	led.enable(false);
+    	if(direction==MotorShaftDirection.Clockwise){
+    		pins.analogWritePin(AnalogPin.P0, 1023-Math.round(1023*speed/100));
+			pins.digitalWritePin(DigitalPin.P6, 0);
+
+			basic.pause(duration);
+
+			pins.analogWritePin(AnalogPin.P0, 1023);
+			pins.digitalWritePin(DigitalPin.P6, 0);
+    	}
+    	else if(direction==MotorShaftDirection.CounterClockwise){
+    		pins.analogWritePin(AnalogPin.P0, 1023-Math.round(1023*speed/100));
+			pins.digitalWritePin(DigitalPin.P6, 1);
+
+			basic.pause(duration);
+
+			pins.analogWritePin(AnalogPin.P0, 1023);
+			pins.digitalWritePin(DigitalPin.P6, 0);
+    	}
+    }
+
+
+
+
+    /**
+     * Set the right motor speed and direction
+     * @param directon to turn the right motor shaft in,
+     *      eg: MotorShaftDirection.Clockwise
+     * @param speed of the motor in percentage, eg: 30%
+     * @param duration in milliseconds to run the
+     *      motor the alarm sound, eg: 2000
+     */
+    //% block="Right motor run|| %direction|at %speed |for %duration ms"
+    //% group="Motor Controls"
+    //% duration.shadow=timePicker
+    //% speed.min=0 speed.max=100
+    //% expandableArgumentMode="enabled"
+    export function setRightMotorSpeed(
         direction: MotorShaftDirection,
         speed: number,
         duration: number) {
