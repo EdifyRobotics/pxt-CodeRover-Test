@@ -77,12 +77,24 @@ namespace CodeRorver {
     export function setLeftMotorSpeed(direction: MotorShaftDirection,speed: number,duration: number) {
     	led.enable(false);
     	pins.analogWritePin(AnalogPin.P0, 500);
+    	basic.pause(1)
 		pins.digitalWritePin(DigitalPin.P6, 0);
+
+		basic.pause(1)
+		pins.analogWritePin(AnalogPin.P1, 500);
+    	basic.pause(1)
+		pins.digitalWritePin(DigitalPin.P7, 0);
 
 		basic.pause(duration);
 
 		pins.analogWritePin(AnalogPin.P0, 1023);
+		basic.pause(1)
 		pins.digitalWritePin(DigitalPin.P6, 0);
+
+		basic.pause(1)
+		pins.analogWritePin(AnalogPin.P1, 1023);
+    	basic.pause(1)
+		pins.digitalWritePin(DigitalPin.P7, 0);
    //  	if(direction==MotorShaftDirection.Clockwise){
    //  		pins.analogWritePin(AnalogPin.P0, 1023-Math.round(1023*speed/100));
 			// pins.digitalWritePin(DigitalPin.P6, 0);
