@@ -86,6 +86,7 @@ namespace CodeRorver {
 			pins.digitalWritePin(DigitalPin.P6, 1);
 			pins.analogWritePin(AnalogPin.P1, 1023);
 			pins.digitalWritePin(DigitalPin.P7, 1);
+			basic.pause(1);
     		
     	}
     	else if(direction==CodeRoverDriveDirection.Backward){
@@ -104,6 +105,7 @@ namespace CodeRorver {
 			pins.digitalWritePin(DigitalPin.P6, 1);
 			pins.analogWritePin(AnalogPin.P1, 1023);
 			pins.digitalWritePin(DigitalPin.P7, 1);
+			basic.pause(1);
     	}
     }
 
