@@ -11,66 +11,77 @@
  * @date  Nov/24/2021
 */
 
+	enum MotorChoice {
+	    //% block="left"
+	    Left,
+	    //% block="right"
+	    Right,
+	    //% block="both"
+	    Both,
+	}
 
-/**
- * Events are functions that take a function (lambda) as the last argument
- */
+	enum MotorShaftDirection {
+	    //% block="clockwise"
+	    Clockwise,
+	    //% block="counter-clockwise"
+	    CounterClockwise
+	}
+
+
+
 //% color="#FEC700"
+//% groups="['Examples' ,'Motor Controls']"
 namespace CodeRorver {
-    /**
-     * A simple event taking a function handler
-     */
-    //% block="on event"
-    export function onEvent(handler: () => void) {
-        handler();
+
+	//% block="fooooooo"
+	//% group="Examples"
+    export function foo() {
+
     }
 
-    //test by tony
-    /**
-     * Events can have arguments before the handler
-     */
-    //% block="on event with $color"
-    export function onEventWithArgs(color: number, handler: () => void) {
-        handler();
+    //% block="bar x = $x text = $text"
+    
+    export function bar(x: number, text: string) {
+
     }
 
-    /**
-     * Event handlers can have arguments too. You can refer to them using $NAME.
-     */
-    //% block="on rare $handlerArg1 event"
-    //% draggableParameters
-    export function onEventWithHandlerArgs(handler: (handlerArg: string) => void) {
-        handler("Hello world!");
+    //% block="shuffled text = $text x = $x"
+    export function shuffled(x: number, text: string) {
+
     }
 
-    /**
-     * You can mix up function argument and handler arguments for best readability,
-     * Make sure to use the $ notation.
-     */
-    //% block="on some event $handlerArg from $arg"
-    //% draggableParameters
-    export function onEventWithHandlerArgsShuffle(arg: number, handler: (handlerArg: string) => void) {
-        handler("Hello world!");
-    }
+
+
+	//% group="Motor Controls"
+
+
+	// Use inlineInputMode=inline to force inputs to appear
+    // on a single line
+
+
+    // Use expandableArgumentMode=enabeled to collapse or
+    // expand EACH input parameter
 
     /**
-     * The arguments on event handlers are variables by default, but they can
-     * also be special "reporter" blocks that can only be used inside the event
-     * handler itself, mimicking the behavior of locally scoped variables.
+     * Set the motor speed and direction
+     * @param directon to turn the motor shaft in,
+     *      eg: MotorShaftDirection.Clockwise
+     * @param speed of the motor in RPM, eg: 30
+     * @param duration in milliseconds to run the
+     *      motor the alarm sound, eg: 2000
      */
-    //% block="on some event $handlerStringArg $handlerBoolArg from $arg"
-    //% draggableParameters="reporter"
-    export function onEventWithHandlerReporterArgs(arg: number, handler: (handlerStringArg: string, handlerBoolArg: boolean) => void) {
-        handler("Hello world", true);
+    //% block="set the %motorChoice to run || %direction|at %speed |for %duration ms"
+    //% duration.shadow=timePicker
+    //% speed.min=0 speed.max=100
+    //% expandableArgumentMode="enabled"
+    export function setMotorSpeed(
+    	motorChoice : MotorChoice,
+        direction: MotorShaftDirection,
+        speed: number,
+        duration: number) {
+
     }
 
-    /**
-     * Events can be made into statements that can be put in line with other events,
-     * similar to loops or conditions.
-     */
-    //% block="on an inline event"
-    //% handlerStatement
-    export function onEventAsStatement(handler: () => void) {
-        handler();
-    }
-}
+
+
+}	
