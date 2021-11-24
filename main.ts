@@ -45,6 +45,9 @@
 //% groups="['Motor Controls','Sensor Controls']"
 namespace CodeRorver {
 
+	//attention!!! when p6 and p7 is set to 1, pwm is inverse, meaning 1023 is stop.
+	//when p6 and p7 is set to 0, pwm is not inverse, meaning 0 is stop.
+
     /**
      * Set the motor speed and direction
      * @param direction to perform the spin, eg: left
@@ -54,7 +57,8 @@ namespace CodeRorver {
     //% degree.min=0 degree.max=360
    	//% group="Motor Controls"
     export function CodeRoverTurn(degree : number, turnChoice: CodeRoverTurnDirection) {
-
+    	//need too check for hall sensor 
+    	//to make sure its turning the right dgree
     }
 
 
@@ -69,6 +73,8 @@ namespace CodeRorver {
     //% duration.shadow=timePicker
    	//% group="Motor Controls"
     export function CodeRoverDrive(direction : CodeRoverDriveDirection, speed:number, duration: number) {
+    	//need too check for hall sensor 
+    	//to make sure its going straight 
     	led.enable(false);
 
     	if(direction==CodeRoverDriveDirection.Forward){
@@ -93,16 +99,16 @@ namespace CodeRorver {
     		pins.analogWritePin(AnalogPin.P0, Math.round(1023*speed/100));
 			pins.digitalWritePin(DigitalPin.P6, 0);
 			//left side clockwise
-			pins.analogWritePin(AnalogPin.P1, Math.round(1023*speed/100));
+			pins.analogWritePin(AnalogPin.P1, Math.round(1023-1023*speed/100));
 			pins.digitalWritePin(DigitalPin.P7, 1);
 
 
     		//then stop 
 			basic.pause(duration);
 			pins.analogWritePin(AnalogPin.P0, 0);
-			pins.digitalWritePin(DigitalPin.P6, 1);
+			pins.digitalWritePin(DigitalPin.P6, 0);
 			pins.analogWritePin(AnalogPin.P1, 0);
-			pins.digitalWritePin(DigitalPin.P7, 1);
+			pins.digitalWritePin(DigitalPin.P7, 0);
 			basic.pause(1);
     	}
     }
@@ -130,17 +136,17 @@ namespace CodeRorver {
 
 			basic.pause(duration);
 
-			pins.analogWritePin(AnalogPin.P1, 1023);
-			pins.digitalWritePin(DigitalPin.P7, 1);
+			pins.analogWritePin(AnalogPin.P1, 0);
+			pins.digitalWritePin(DigitalPin.P7, 0);
     	}
     	else if(direction==MotorShaftDirection.CounterClockwise){
-    		pins.analogWritePin(AnalogPin.P1, 1023-Math.round(1023*speed/100));
+    		pins.analogWritePin(AnalogPin.P1, Math.round(1023*speed/100));
 			pins.digitalWritePin(DigitalPin.P7, 0);
 
 			basic.pause(duration);
 
-			pins.analogWritePin(AnalogPin.P1, 1023);
-			pins.digitalWritePin(DigitalPin.P7, 1);
+			pins.analogWritePin(AnalogPin.P1, 0);
+			pins.digitalWritePin(DigitalPin.P7, 0);
     	}
     }
 
