@@ -30,33 +30,11 @@
 
 
 //% color="#FEC700"
-//% groups="['Examples' ,'Motor Controls']"
+//% groups="['Motor Controls','Sensor Controls']"
 namespace CodeRorver {
-
-	//% block="fooooooo"
-	//% group="Examples"
-    export function foo() {
-
-    }
-
-    //% block="bar x = $x text = $text"
-    
-    export function bar(x: number, text: string) {
-
-    }
-
-    //% block="shuffled text = $text x = $x"
-    export function shuffled(x: number, text: string) {
-
-    }
-
-
-
-
 
 	// Use inlineInputMode=inline to force inputs to appear
     // on a single line
-
 
     // Use expandableArgumentMode=enabeled to collapse or
     // expand EACH input parameter
@@ -81,6 +59,7 @@ namespace CodeRorver {
         duration: number) {
 
     }
+    
 
     /**
      * Set the left motor speed and direction
