@@ -65,8 +65,8 @@ namespace CodeRorver {
      * @param drive duration, eg: 500
      */
     //% block="Drive %direction at %speed for %duration ms"
-    //% duration.shadow=timePicker
     //% speed.min=0 speed.max=100
+    //% duration.shadow=timePicker
    	//% group="Motor Controls"
     export function CodeRoverDrive(direction : CodeRoverDriveDirection, speed:number, duration: number) {
     	led.enable(false);
