@@ -147,9 +147,8 @@ namespace CodeRorver {
 	        hall1Triggered=false 
 	        hall2Triggered=false
 	    }
-
-
-	    if (input.runningTime() - lastEndTime >= 50) {
+	    else{
+	    	if (input.runningTime() - lastEndTime >= 50) {
 	        if (initialSpeed < targetSpeed) {
 	            initialSpeed = initialSpeed + 1
 	            if (initialSpeed > targetSpeed) {
@@ -255,6 +254,9 @@ namespace CodeRorver {
 	        
 	        lastEndTime = input.runningTime()
 	    }
+	    }
+
+	    
 	}
 
     //counter function to keep motor going on a straight line 
