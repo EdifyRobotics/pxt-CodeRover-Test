@@ -129,18 +129,20 @@ namespace CodeRorver {
 	    if (input.runningTime() - startDriveTime >= duration) {
 	    	//stop and clear variable 
 	        canDriveRobot = false
-	        startDriveTime=0
-	        lastEndTime=0
-	        hall1Count=0
-	        hall2Count=0
-	        hall1Triggered=false 
-	        hall2Triggered=false
 
 	        //stop the car
 	        pins.analogWritePin(AnalogPin.P0, 0)
 	        pins.digitalWritePin(DigitalPin.P6, 0)
 	        pins.analogWritePin(AnalogPin.P1, 0)
             pins.digitalWritePin(DigitalPin.P7, 0)
+
+            basic.pause(10)
+           	startDriveTime=0
+	        lastEndTime=0
+	        hall1Count=0
+	        hall2Count=0
+	        hall1Triggered=false 
+	        hall2Triggered=false
 	    }
 
 
@@ -282,7 +284,7 @@ namespace CodeRorver {
 		startDriveTime=input.runningTime()
 		while(canDriveRobot==true){
 			countHall()
-			driveRobot(duration,direction,speed)
+			driveRobot(direction,speed,duration)
 		}	
     }
 
