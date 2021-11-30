@@ -168,8 +168,8 @@ namespace CodeRorver {
 		            // left side counter-clockwise
 		            pins.analogWritePin(AnalogPin.P1, Math.round(1023 * fasterSpeed / 100))
 		            pins.digitalWritePin(DigitalPin.P7, 0)
-		            // pins.digitalWritePin(DigitalPin.P3, 0)
-		            // pins.digitalWritePin(DigitalPin.P9, 1)
+		            pins.digitalWritePin(DigitalPin.P3, 0)
+		            pins.digitalWritePin(DigitalPin.P9, 1)
 		        } else if (hall1Count > hall2Count) {
 		            // right side slower
 		            fasterSpeed = initialSpeed + pValue * (hall1Count - hall2Count)
@@ -186,8 +186,8 @@ namespace CodeRorver {
 		            // left side counter-clockwise
 		            pins.analogWritePin(AnalogPin.P1, Math.round(1023 * slowerSpeed / 100))
 		            pins.digitalWritePin(DigitalPin.P7, 0)
-		            // pins.digitalWritePin(DigitalPin.P3, 1)
-		            // pins.digitalWritePin(DigitalPin.P9, 1)
+		            pins.digitalWritePin(DigitalPin.P3, 1)
+		            pins.digitalWritePin(DigitalPin.P9, 1)
 		        } else {
 		            // p0p6 is the same as p1p7
 		            pins.analogWritePin(AnalogPin.P0, 1023 - Math.round(1023 * initialSpeed / 100))
@@ -195,8 +195,8 @@ namespace CodeRorver {
 		            // left side counter-clockwise
 		            pins.analogWritePin(AnalogPin.P1, Math.round(1023 * initialSpeed / 100))
 		            pins.digitalWritePin(DigitalPin.P7, 0)
-		            // pins.digitalWritePin(DigitalPin.P3, 0)
-		            // pins.digitalWritePin(DigitalPin.P9, 0)
+		            pins.digitalWritePin(DigitalPin.P3, 0)
+		            pins.digitalWritePin(DigitalPin.P9, 0)
 		        }
 	       	}
 	       	//move backward straight
