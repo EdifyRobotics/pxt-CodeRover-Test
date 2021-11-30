@@ -259,8 +259,8 @@ namespace CodeRorver {
 	        if (hall1Count + hall2Count < 480*(degree/360)) {
 	            if (turnChoice == CodeRoverTurnDirection.Right) {
 	                if (hall1Count < hall2Count) {
-	                    fasterSpeed = initialSpeed + pValue * (hall2Count - hall1Count)
-	                    slowerSpeed = initialSpeed - pValue * (hall2Count - hall1Count)
+	                    fasterSpeed = turnSpeed + pValue * (hall2Count - hall1Count)
+	                    slowerSpeed = turnSpeed - pValue * (hall2Count - hall1Count)
 	                    if (fasterSpeed > 70) {
 	                        fasterSpeed = 70
 	                    }
@@ -278,8 +278,8 @@ namespace CodeRorver {
 	                    pins.digitalWritePin(DigitalPin.P9, 1)
 	                } else if (hall1Count > hall2Count) {
 	                    // right side slower
-	                    fasterSpeed = initialSpeed + pValue * (hall1Count - hall2Count)
-	                    slowerSpeed = initialSpeed - pValue * (hall1Count - hall2Count)
+	                    fasterSpeed = turnSpeed + pValue * (hall1Count - hall2Count)
+	                    slowerSpeed = turnSpeed - pValue * (hall1Count - hall2Count)
 	                    if (fasterSpeed > 70) {
 	                        fasterSpeed = 70
 	                    }
@@ -298,18 +298,18 @@ namespace CodeRorver {
 	                } else {
 	                    // p0p6 is the same as p1p7
 	                    // right side clockwise
-	                    pins.analogWritePin(AnalogPin.P0, Math.round(1023 * initialSpeed / 100))
+	                    pins.analogWritePin(AnalogPin.P0, Math.round(1023 * turnSpeed / 100))
 	                    pins.digitalWritePin(DigitalPin.P6, 0)
 	                    // left side counter-clockwise
-	                    pins.analogWritePin(AnalogPin.P1, Math.round(1023 * initialSpeed / 100))
+	                    pins.analogWritePin(AnalogPin.P1, Math.round(1023 * turnSpeed / 100))
 	                    pins.digitalWritePin(DigitalPin.P7, 0)
 	                    pins.digitalWritePin(DigitalPin.P3, 0)
 	                    pins.digitalWritePin(DigitalPin.P9, 0)
 	                }
 	            } else if (turnChoice == CodeRoverTurnDirection.Left) {
 	                if (hall1Count < hall2Count) {
-	                    fasterSpeed = initialSpeed + pValue * (hall2Count - hall1Count)
-	                    slowerSpeed = initialSpeed - pValue * (hall2Count - hall1Count)
+	                    fasterSpeed = turnSpeed + pValue * (hall2Count - hall1Count)
+	                    slowerSpeed = turnSpeed - pValue * (hall2Count - hall1Count)
 	                    if (fasterSpeed > 70) {
 	                        fasterSpeed = 70
 	                    }
@@ -327,8 +327,8 @@ namespace CodeRorver {
 	                    pins.digitalWritePin(DigitalPin.P9, 1)
 	                } else if (hall1Count > hall2Count) {
 	                    // right side slower
-	                    fasterSpeed = initialSpeed + pValue * (hall1Count - hall2Count)
-	                    slowerSpeed = initialSpeed - pValue * (hall1Count - hall2Count)
+	                    fasterSpeed = turnSpeed + pValue * (hall1Count - hall2Count)
+	                    slowerSpeed = turnSpeed - pValue * (hall1Count - hall2Count)
 	                    if (fasterSpeed > 70) {
 	                        fasterSpeed = 70
 	                    }
@@ -347,10 +347,10 @@ namespace CodeRorver {
 	                } else {
 	                    // p0p6 is the same as p1p7
 	                    // right side clockwise
-	                    pins.analogWritePin(AnalogPin.P0, 1023 - Math.round(1023 * initialSpeed / 100))
+	                    pins.analogWritePin(AnalogPin.P0, 1023 - Math.round(1023 * turnSpeed / 100))
 	                    pins.digitalWritePin(DigitalPin.P6, 1)
 	                    // left side counter-clockwise
-	                    pins.analogWritePin(AnalogPin.P1, 1023 - Math.round(1023 * initialSpeed / 100))
+	                    pins.analogWritePin(AnalogPin.P1, 1023 - Math.round(1023 * turnSpeed / 100))
 	                    pins.digitalWritePin(DigitalPin.P7, 1)
 	                    pins.digitalWritePin(DigitalPin.P3, 0)
 	                    pins.digitalWritePin(DigitalPin.P9, 0)
