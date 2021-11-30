@@ -123,8 +123,11 @@ namespace CodeRorver {
 	    }
 	}
 
-	function driveRobot (duration:number, direction:number, targetSpeed:number) {
+	function driveRobot (direction:number, targetSpeed:number, duration:number) {
 
+		if (startDriveTime==0){
+			startDriveTime=input.runningTime()
+		}
 		//code to stop car after duration 
 	    if (input.runningTime() - startDriveTime >= duration) {
 	    	//stop and clear variable 
@@ -281,7 +284,6 @@ namespace CodeRorver {
 
 		//set canDriveRobot to true after duration set it to false 
 		canDriveRobot=true
-		startDriveTime=input.runningTime()
 		while(canDriveRobot==true){
 			countHall()
 			driveRobot(direction,speed,duration)
