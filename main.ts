@@ -97,7 +97,6 @@ namespace CodeRorver {
 	let hall1Count = 0
 	let hall2Triggered = false
 	let hall1Triggered = false
-	let pValue = 0
 	let initialSpeed = 0 
 	let canDriveRobot=false 
 	let startDriveTime=0 //this keeps track of duration
@@ -123,7 +122,7 @@ namespace CodeRorver {
 	    }
 	}
 
-	function driveRobot (direction:number, targetSpeed:number, duration:number) {
+	function driveRobot (direction:number, targetSpeed:number, duration:number, pValue:number) {
 
 		if (startDriveTime==0){
 			startDriveTime=input.runningTime()
@@ -158,10 +157,10 @@ namespace CodeRorver {
 		        //move forward straight 
 		       	if (direction==CodeRoverDriveDirection.Forward){
 		       		if (hall1Count < hall2Count) {
-			            // fasterSpeed = initialSpeed + pValue * (hall2Count - hall1Count)
-			            // slowerSpeed = initialSpeed - pValue * (hall2Count - hall1Count)
-			            fasterSpeed=20
-			            slowerSpeed=0
+			            fasterSpeed = initialSpeed + pValue * (hall2Count - hall1Count)
+			            slowerSpeed = initialSpeed - pValue * (hall2Count - hall1Count)
+			            // fasterSpeed=20
+			            // slowerSpeed=0
 			            if (fasterSpeed > 70) { //limit max speed to 70% and min speed to 10%
 			                fasterSpeed = 70
 			            }
@@ -178,10 +177,10 @@ namespace CodeRorver {
 			            pins.digitalWritePin(DigitalPin.P9, 1)
 			        } else if (hall1Count > hall2Count) {
 			            // right side slower
-			            // fasterSpeed = initialSpeed + pValue * (hall1Count - hall2Count)
-			            // slowerSpeed = initialSpeed - pValue * (hall1Count - hall2Count)
-			            fasterSpeed=20
-			            slowerSpeed=0
+			            fasterSpeed = initialSpeed + pValue * (hall1Count - hall2Count)
+			            slowerSpeed = initialSpeed - pValue * (hall1Count - hall2Count)
+			            // fasterSpeed=20
+			            // slowerSpeed=0
 			            if (fasterSpeed > 70) { //limit max speed to 70% and min speed to 10%
 			                fasterSpeed = 70
 			            }
@@ -287,12 +286,13 @@ namespace CodeRorver {
 		// 霍尔需要先设定p5,p11的pull，防止两个pin是随机电压？
 		pins.setPull(DigitalPin.P5, PinPullMode.PullDown)
 		pins.setPull(DigitalPin.P11, PinPullMode.PullDown)
+		pValue=speed/speed*0.3
 
 		//set canDriveRobot to true after duration set it to false 
 		canDriveRobot=true
 		while(canDriveRobot==true){
 			countHall()
-			driveRobot(direction,speed,duration)
+			driveRobot(direction,speed,duration,pValue)
 		}	
     }
 
