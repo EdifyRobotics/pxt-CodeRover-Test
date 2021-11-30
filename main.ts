@@ -287,7 +287,7 @@ namespace CodeRorver {
 		// 霍尔需要先设定p5,p11的pull，防止两个pin是随机电压？
 		pins.setPull(DigitalPin.P5, PinPullMode.PullDown)
 		pins.setPull(DigitalPin.P11, PinPullMode.PullDown)
-		pValue=speed/speed*0.1
+		pValue=speed/speed*0.3
 
 		//set canDriveRobot to true after duration set it to false 
 		canDriveRobot=true
