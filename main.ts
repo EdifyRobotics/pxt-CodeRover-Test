@@ -88,24 +88,8 @@ namespace CodeRorver {
 
 
 
+
     //counter function to keep motor going on a straight line 
-
-    /**
-     * Set the motor speed and direction
-     * @param direction to drive, eg: forward
-     * @param drive speed percentage, eg: 50
-     * @param drive duration, eg: 500
-     */
-    //% block="Drive %direction at %speed for %duration ms"
-    //% speed.min=0 speed.max=100
-    //% duration.shadow=timePicker
-   	//% group="Direction"
-
-
-
-
-    export function CodeRoverDrive(direction : CodeRoverDriveDirection, speed:number, duration: number) {
-    	    //counter function to keep motor going on a straight line 
 
     let slowerSpeed = 0
 	let fasterSpeed = 0
@@ -278,7 +262,24 @@ namespace CodeRorver {
 
 	    
 	}
-    	
+
+    //counter function to keep motor going on a straight line 
+
+    /**
+     * Set the motor speed and direction
+     * @param direction to drive, eg: forward
+     * @param drive speed percentage, eg: 50
+     * @param drive duration, eg: 500
+     */
+    //% block="Drive %direction at %speed for %duration ms"
+    //% speed.min=0 speed.max=100
+    //% duration.shadow=timePicker
+   	//% group="Direction"
+
+
+
+
+    export function CodeRoverDrive(direction : CodeRoverDriveDirection, speed:number, duration: number) {
     	//need too check for hall sensor 
     	//to make sure its going straight 
     	// 让电机不转p6,p7是与led共用
@@ -286,7 +287,7 @@ namespace CodeRorver {
 		// 霍尔需要先设定p5,p11的pull，防止两个pin是随机电压？
 		pins.setPull(DigitalPin.P5, PinPullMode.PullDown)
 		pins.setPull(DigitalPin.P11, PinPullMode.PullDown)
-		pValue=speed/speed*0.3
+		pValue=speed/(speed*0.3)
 
 		//set canDriveRobot to true after duration set it to false 
 		canDriveRobot=true
