@@ -248,16 +248,9 @@ namespace CodeRorver {
 
 
 
-    /**
-     * Set the motor speed and direction
-     * @param direction to perform the spin, eg: left
-     * @param degree need to turn, eg: 45
-     */
-    //% block="Turn %degree degrees to the %turnChoice"
-    //% degree.min=0 degree.max=360
-   	//% group="Direction"
 
-   	let turnSpeed=30
+    //turning 
+    let turnSpeed=30
    	let keepTurning=false
    	function turnRobot(turnChoice:CodeRoverTurnDirection, degree:number){
    		if (input.runningTime() - lastEndTime >= 50) {
@@ -378,6 +371,15 @@ namespace CodeRorver {
 	        lastEndTime = input.runningTime()
 	    }
    	}
+
+    /**
+     * Set the motor speed and direction
+     * @param direction to perform the spin, eg: left
+     * @param degree need to turn, eg: 45
+     */
+    //% block="Turn %degree degrees to the %turnChoice"
+    //% degree.min=0 degree.max=360
+   	//% group="Direction"
 
     export function CodeRoverTurn(degree : number, turnChoice: CodeRoverTurnDirection) {
     	//need to check for hall sensor 
