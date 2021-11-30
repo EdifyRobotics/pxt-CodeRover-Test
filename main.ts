@@ -98,6 +98,7 @@ namespace CodeRorver {
 	let hall2Triggered = false
 	let hall1Triggered = false
 	let initialSpeed = 0 
+	let pValue=0
 	let canDriveRobot=false 
 	let startDriveTime=0 //this keeps track of duration
 	let lastEndTime = 0 //this keeps track of how often driveRobot function will compare 2 hall sensor counts. 
