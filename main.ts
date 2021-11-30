@@ -128,7 +128,7 @@ namespace CodeRorver {
 		//code to stop car after duration 
 	    if (input.runningTime() - startDriveTime >= duration) {
 	    	//stop and clear variable 
-	        canMove = false
+	        canDriveRobot = false
 	        startDriveTime=0
 	        lastEndTime=0
 	        hall1Count=0
@@ -283,43 +283,6 @@ namespace CodeRorver {
 			countHall()
 			driveRobot(duration,direction,speed)
 		}	
-
-
-
-   //  	if(direction==CodeRoverDriveDirection.Forward){
-   //  		//right side clockwise 
-   //  		pins.analogWritePin(AnalogPin.P0, Math.round(1023-1023*speed/100));
-			// pins.digitalWritePin(DigitalPin.P6, 1);
-			// //left side counter-clockwise
-			// pins.analogWritePin(AnalogPin.P1, Math.round(1023*speed/100));
-			// pins.digitalWritePin(DigitalPin.P7, 0);
-
-			// //then stop 
-			// basic.pause(duration);
-			// pins.analogWritePin(AnalogPin.P0, 0);
-			// pins.digitalWritePin(DigitalPin.P6, 0);
-			// pins.analogWritePin(AnalogPin.P1, 0);
-			// pins.digitalWritePin(DigitalPin.P7, 0);
-			// basic.pause(1);
-    		
-   //  	}
-   //  	else if(direction==CodeRoverDriveDirection.Backward){
-   //  		//right side counter-clockwise
-   //  		pins.analogWritePin(AnalogPin.P0, Math.round(1023*speed/100));
-			// pins.digitalWritePin(DigitalPin.P6, 0);
-			// //left side clockwise
-			// pins.analogWritePin(AnalogPin.P1, Math.round(1023-1023*speed/100));
-			// pins.digitalWritePin(DigitalPin.P7, 1);
-
-
-   //  		//then stop 
-			// basic.pause(duration);
-			// pins.analogWritePin(AnalogPin.P0, 0);
-			// pins.digitalWritePin(DigitalPin.P6, 0);
-			// pins.analogWritePin(AnalogPin.P1, 0);
-			// pins.digitalWritePin(DigitalPin.P7, 0);
-			// basic.pause(1);
-   //  	}
     }
 
 
