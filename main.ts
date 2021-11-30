@@ -259,39 +259,39 @@ namespace CodeRorver {
 	        if (hall1Count + hall2Count < 480*(degree/360)) {
 	            if (turnChoice == CodeRoverTurnDirection.Right) {
 	                if (hall1Count < hall2Count) {
-	                    updateSpeed = initialSpeed + pValue * (hall2Count - hall1Count)
-	                    updateSpeed2 = initialSpeed - pValue * (hall2Count - hall1Count)
-	                    if (updateSpeed > 70) {
-	                        updateSpeed = 70
+	                    fasterSpeed = initialSpeed + pValue * (hall2Count - hall1Count)
+	                    slowerSpeed = initialSpeed - pValue * (hall2Count - hall1Count)
+	                    if (fasterSpeed > 70) {
+	                        fasterSpeed = 70
 	                    }
-	                    if (updateSpeed2 < 0) {
-	                        updateSpeed2 = 10
+	                    if (slowerSpeed < 0) {
+	                        slowerSpeed = 10
 	                    }
 	                    // p0p6 is faster than p1p7, p0p6 slow down
 	                    // right side clockwise
-	                    pins.analogWritePin(AnalogPin.P0, Math.round(1023 * updateSpeed2 / 100))
+	                    pins.analogWritePin(AnalogPin.P0, Math.round(1023 * slowerSpeed / 100))
 	                    pins.digitalWritePin(DigitalPin.P6, 0)
 	                    // left side counter-clockwise
-	                    pins.analogWritePin(AnalogPin.P1, Math.round(1023 * updateSpeed / 100))
+	                    pins.analogWritePin(AnalogPin.P1, Math.round(1023 * fasterSpeed / 100))
 	                    pins.digitalWritePin(DigitalPin.P7, 0)
 	                    pins.digitalWritePin(DigitalPin.P3, 0)
 	                    pins.digitalWritePin(DigitalPin.P9, 1)
 	                } else if (hall1Count > hall2Count) {
 	                    // right side slower
-	                    updateSpeed = initialSpeed + pValue * (hall1Count - hall2Count)
-	                    updateSpeed2 = initialSpeed - pValue * (hall1Count - hall2Count)
-	                    if (updateSpeed > 70) {
-	                        updateSpeed = 70
+	                    fasterSpeed = initialSpeed + pValue * (hall1Count - hall2Count)
+	                    slowerSpeed = initialSpeed - pValue * (hall1Count - hall2Count)
+	                    if (fasterSpeed > 70) {
+	                        fasterSpeed = 70
 	                    }
-	                    if (updateSpeed2 < 0) {
-	                        updateSpeed2 = 10
+	                    if (slowerSpeed < 0) {
+	                        slowerSpeed = 10
 	                    }
 	                    // p0p6 is slower than p1p7, p0p6 speed up
 	                    // right side clockwise
-	                    pins.analogWritePin(AnalogPin.P0, Math.round(1023 * updateSpeed / 100))
+	                    pins.analogWritePin(AnalogPin.P0, Math.round(1023 * fasterSpeed / 100))
 	                    pins.digitalWritePin(DigitalPin.P6, 0)
 	                    // left side counter-clockwise
-	                    pins.analogWritePin(AnalogPin.P1, Math.round(1023 * updateSpeed2 / 100))
+	                    pins.analogWritePin(AnalogPin.P1, Math.round(1023 * slowerSpeed / 100))
 	                    pins.digitalWritePin(DigitalPin.P7, 0)
 	                    pins.digitalWritePin(DigitalPin.P3, 1)
 	                    pins.digitalWritePin(DigitalPin.P9, 1)
@@ -308,39 +308,39 @@ namespace CodeRorver {
 	                }
 	            } else if (turnChoice == CodeRoverTurnDirection.Left) {
 	                if (hall1Count < hall2Count) {
-	                    updateSpeed = initialSpeed + pValue * (hall2Count - hall1Count)
-	                    updateSpeed2 = initialSpeed - pValue * (hall2Count - hall1Count)
-	                    if (updateSpeed > 70) {
-	                        updateSpeed = 70
+	                    fasterSpeed = initialSpeed + pValue * (hall2Count - hall1Count)
+	                    slowerSpeed = initialSpeed - pValue * (hall2Count - hall1Count)
+	                    if (fasterSpeed > 70) {
+	                        fasterSpeed = 70
 	                    }
-	                    if (updateSpeed2 < 0) {
-	                        updateSpeed2 = 10
+	                    if (slowerSpeed < 0) {
+	                        slowerSpeed = 10
 	                    }
 	                    // p0p6 is faster than p1p7, p0p6 slow down
 	                    // right side clockwise
-	                    pins.analogWritePin(AnalogPin.P0, 1023 - Math.round(1023 * updateSpeed2 / 100))
+	                    pins.analogWritePin(AnalogPin.P0, 1023 - Math.round(1023 * slowerSpeed / 100))
 	                    pins.digitalWritePin(DigitalPin.P6, 1)
 	                    // left side counter-clockwise
-	                    pins.analogWritePin(AnalogPin.P1, 1023 - Math.round(1023 * updateSpeed / 100))
+	                    pins.analogWritePin(AnalogPin.P1, 1023 - Math.round(1023 * fasterSpeed / 100))
 	                    pins.digitalWritePin(DigitalPin.P7, 1)
 	                    pins.digitalWritePin(DigitalPin.P3, 0)
 	                    pins.digitalWritePin(DigitalPin.P9, 1)
 	                } else if (hall1Count > hall2Count) {
 	                    // right side slower
-	                    updateSpeed = initialSpeed + pValue * (hall1Count - hall2Count)
-	                    updateSpeed2 = initialSpeed - pValue * (hall1Count - hall2Count)
-	                    if (updateSpeed > 70) {
-	                        updateSpeed = 70
+	                    fasterSpeed = initialSpeed + pValue * (hall1Count - hall2Count)
+	                    slowerSpeed = initialSpeed - pValue * (hall1Count - hall2Count)
+	                    if (fasterSpeed > 70) {
+	                        fasterSpeed = 70
 	                    }
-	                    if (updateSpeed2 < 0) {
-	                        updateSpeed2 = 10
+	                    if (slowerSpeed < 0) {
+	                        slowerSpeed = 10
 	                    }
 	                    // p0p6 is slower than p1p7, p0p6 speed up
 	                    // right side clockwise
-	                    pins.analogWritePin(AnalogPin.P0, 1023 - Math.round(1023 * updateSpeed / 100))
+	                    pins.analogWritePin(AnalogPin.P0, 1023 - Math.round(1023 * fasterSpeed / 100))
 	                    pins.digitalWritePin(DigitalPin.P6, 1)
 	                    // left side counter-clockwise
-	                    pins.analogWritePin(AnalogPin.P1, 1023 - Math.round(1023 * updateSpeed2 / 100))
+	                    pins.analogWritePin(AnalogPin.P1, 1023 - Math.round(1023 * slowerSpeed / 100))
 	                    pins.digitalWritePin(DigitalPin.P7, 1)
 	                    pins.digitalWritePin(DigitalPin.P3, 1)
 	                    pins.digitalWritePin(DigitalPin.P9, 1)
