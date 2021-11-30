@@ -279,6 +279,7 @@ namespace CodeRorver {
 
 		//set canDriveRobot to true after duration set it to false 
 		canDriveRobot=true
+		startDriveTime=input.runningTime()
 		while(canDriveRobot==true){
 			countHall()
 			driveRobot(duration,direction,speed)
