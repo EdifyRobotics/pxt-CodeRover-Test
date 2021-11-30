@@ -69,26 +69,6 @@ namespace CodeRorver {
 	//when p6 and p7 is set to 0, pwm is not inverse, meaning 0 is stop.
 
 
-
-
-    /**
-     * Set the motor speed and direction
-     * @param direction to perform the spin, eg: left
-     * @param degree need to turn, eg: 45
-     */
-    //% block="Turn %degree degrees to the %turnChoice"
-    //% degree.min=0 degree.max=360
-   	//% group="Direction"
-    export function CodeRoverTurn(degree : number, turnChoice: CodeRoverTurnDirection) {
-    	//need too check for hall sensor 
-    	//to make sure its turning the right dgree
-    }
-
-
-
-
-
-
     //counter function to keep motor going on a straight line 
 
     let slowerSpeed = 0
@@ -264,6 +244,163 @@ namespace CodeRorver {
 	}
 
     //counter function to keep motor going on a straight line 
+
+
+
+
+    /**
+     * Set the motor speed and direction
+     * @param direction to perform the spin, eg: left
+     * @param degree need to turn, eg: 45
+     */
+    //% block="Turn %degree degrees to the %turnChoice"
+    //% degree.min=0 degree.max=360
+   	//% group="Direction"
+
+   	let turnSpeed=30
+   	let keepTurning=false
+   	function turnRobot(turnChoice:CodeRoverTurnDirection, degree:number){
+   		if (input.runningTime() - lastEndTime >= 50) {
+   			// counting hall sensor 60 times each side adds up to 90 degrees. 
+   			//480 is 360 degrees. use 480/
+	        if (hall1Count + hall2Count < 480*(degree/360)) {
+	            if (turnChoice == CodeRoverTurnDirection.Right) {
+	                if (hall1Count < hall2Count) {
+	                    updateSpeed = initialSpeed + pValue * (hall2Count - hall1Count)
+	                    updateSpeed2 = initialSpeed - pValue * (hall2Count - hall1Count)
+	                    if (updateSpeed > 70) {
+	                        updateSpeed = 70
+	                    }
+	                    if (updateSpeed2 < 0) {
+	                        updateSpeed2 = 10
+	                    }
+	                    // p0p6 is faster than p1p7, p0p6 slow down
+	                    // right side clockwise
+	                    pins.analogWritePin(AnalogPin.P0, Math.round(1023 * updateSpeed2 / 100))
+	                    pins.digitalWritePin(DigitalPin.P6, 0)
+	                    // left side counter-clockwise
+	                    pins.analogWritePin(AnalogPin.P1, Math.round(1023 * updateSpeed / 100))
+	                    pins.digitalWritePin(DigitalPin.P7, 0)
+	                    pins.digitalWritePin(DigitalPin.P3, 0)
+	                    pins.digitalWritePin(DigitalPin.P9, 1)
+	                } else if (hall1Count > hall2Count) {
+	                    // right side slower
+	                    updateSpeed = initialSpeed + pValue * (hall1Count - hall2Count)
+	                    updateSpeed2 = initialSpeed - pValue * (hall1Count - hall2Count)
+	                    if (updateSpeed > 70) {
+	                        updateSpeed = 70
+	                    }
+	                    if (updateSpeed2 < 0) {
+	                        updateSpeed2 = 10
+	                    }
+	                    // p0p6 is slower than p1p7, p0p6 speed up
+	                    // right side clockwise
+	                    pins.analogWritePin(AnalogPin.P0, Math.round(1023 * updateSpeed / 100))
+	                    pins.digitalWritePin(DigitalPin.P6, 0)
+	                    // left side counter-clockwise
+	                    pins.analogWritePin(AnalogPin.P1, Math.round(1023 * updateSpeed2 / 100))
+	                    pins.digitalWritePin(DigitalPin.P7, 0)
+	                    pins.digitalWritePin(DigitalPin.P3, 1)
+	                    pins.digitalWritePin(DigitalPin.P9, 1)
+	                } else {
+	                    // p0p6 is the same as p1p7
+	                    // right side clockwise
+	                    pins.analogWritePin(AnalogPin.P0, Math.round(1023 * initialSpeed / 100))
+	                    pins.digitalWritePin(DigitalPin.P6, 0)
+	                    // left side counter-clockwise
+	                    pins.analogWritePin(AnalogPin.P1, Math.round(1023 * initialSpeed / 100))
+	                    pins.digitalWritePin(DigitalPin.P7, 0)
+	                    pins.digitalWritePin(DigitalPin.P3, 0)
+	                    pins.digitalWritePin(DigitalPin.P9, 0)
+	                }
+	            } else if (turnChoice == CodeRoverTurnDirection.Left) {
+	                if (hall1Count < hall2Count) {
+	                    updateSpeed = initialSpeed + pValue * (hall2Count - hall1Count)
+	                    updateSpeed2 = initialSpeed - pValue * (hall2Count - hall1Count)
+	                    if (updateSpeed > 70) {
+	                        updateSpeed = 70
+	                    }
+	                    if (updateSpeed2 < 0) {
+	                        updateSpeed2 = 10
+	                    }
+	                    // p0p6 is faster than p1p7, p0p6 slow down
+	                    // right side clockwise
+	                    pins.analogWritePin(AnalogPin.P0, 1023 - Math.round(1023 * updateSpeed2 / 100))
+	                    pins.digitalWritePin(DigitalPin.P6, 1)
+	                    // left side counter-clockwise
+	                    pins.analogWritePin(AnalogPin.P1, 1023 - Math.round(1023 * updateSpeed / 100))
+	                    pins.digitalWritePin(DigitalPin.P7, 1)
+	                    pins.digitalWritePin(DigitalPin.P3, 0)
+	                    pins.digitalWritePin(DigitalPin.P9, 1)
+	                } else if (hall1Count > hall2Count) {
+	                    // right side slower
+	                    updateSpeed = initialSpeed + pValue * (hall1Count - hall2Count)
+	                    updateSpeed2 = initialSpeed - pValue * (hall1Count - hall2Count)
+	                    if (updateSpeed > 70) {
+	                        updateSpeed = 70
+	                    }
+	                    if (updateSpeed2 < 0) {
+	                        updateSpeed2 = 10
+	                    }
+	                    // p0p6 is slower than p1p7, p0p6 speed up
+	                    // right side clockwise
+	                    pins.analogWritePin(AnalogPin.P0, 1023 - Math.round(1023 * updateSpeed / 100))
+	                    pins.digitalWritePin(DigitalPin.P6, 1)
+	                    // left side counter-clockwise
+	                    pins.analogWritePin(AnalogPin.P1, 1023 - Math.round(1023 * updateSpeed2 / 100))
+	                    pins.digitalWritePin(DigitalPin.P7, 1)
+	                    pins.digitalWritePin(DigitalPin.P3, 1)
+	                    pins.digitalWritePin(DigitalPin.P9, 1)
+	                } else {
+	                    // p0p6 is the same as p1p7
+	                    // right side clockwise
+	                    pins.analogWritePin(AnalogPin.P0, 1023 - Math.round(1023 * initialSpeed / 100))
+	                    pins.digitalWritePin(DigitalPin.P6, 1)
+	                    // left side counter-clockwise
+	                    pins.analogWritePin(AnalogPin.P1, 1023 - Math.round(1023 * initialSpeed / 100))
+	                    pins.digitalWritePin(DigitalPin.P7, 1)
+	                    pins.digitalWritePin(DigitalPin.P3, 0)
+	                    pins.digitalWritePin(DigitalPin.P9, 0)
+	                }
+	            }
+	        } else {
+	            // p0p6 is faster than p1p7, p0p6 slow down
+	            // right side clockwise
+	            pins.analogWritePin(AnalogPin.P0, 0)
+	            pins.digitalWritePin(DigitalPin.P6, 0)
+	            // left side counter-clockwise
+	            pins.analogWritePin(AnalogPin.P1, 0)
+	            pins.digitalWritePin(DigitalPin.P7, 0)
+
+	            //stop turning 
+	            keepTurning=false 
+	        }
+	        lastEndTime = input.runningTime()
+	    }
+   	}
+
+    export function CodeRoverTurn(degree : number, turnChoice: CodeRoverTurnDirection) {
+    	//need to check for hall sensor 
+    	//to make sure its turning the correct degree 
+    	// 让电机不转p6,p7是与led共用
+		led.enable(false)
+		// 霍尔需要先设定p5,p11的pull，防止两个pin是随机电压？
+		pins.setPull(DigitalPin.P5, PinPullMode.PullDown)
+		pins.setPull(DigitalPin.P11, PinPullMode.PullDown)
+		pValue=turnSpeed/(turnSpeed*0.3)
+
+		keepTurning=true
+		//set canDriveRobot to true after duration set it to false 
+		while(keepTurning==true){
+			countHall()
+			turnRobot(turnChoice,degree)
+		}	
+    }
+
+
+
+
+
 
     /**
      * Set the motor speed and direction
