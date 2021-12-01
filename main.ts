@@ -581,10 +581,11 @@ namespace CodeRorver {
    	function callDriveNoStopFunction(direction : CodeRoverDriveDirection, speed:number, pValue:number, driveSignal:boolean){
    		
    		canDriveRobotNoStop=driveSignal
-		while(canDriveRobotNoStop==true){
+		// while(canDriveRobotNoStop==true){
+		if (canDriveRobotNoStop==true){
 			countHall()
 			driveRobotNoStop(direction,speed,pValue)
-		}	
+		}
    	}
 
 
