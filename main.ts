@@ -815,18 +815,17 @@ namespace CodeRorver {
 			// }
 
 			if(unit==PingUnit.Centimeters){
-				sonarLastEndTime = input.runningTime()
 				return Math.idiv(d, 58);
 			}
 			else if(unit == PingUnit.Inches){
-				sonarLastEndTime = input.runningTime()
 				return Math.idiv(d, 148);
 			}
 			else{
-				sonarLastEndTime = input.runningTime()
 				return d ;
 
 			}
+			sonarLastEndTime = input.runningTime()
+
 		}
 		else{
 			return -1000
