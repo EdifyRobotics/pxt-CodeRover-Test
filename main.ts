@@ -250,7 +250,7 @@ namespace CodeRorver {
 
     //drive robot nonestop 
     function driveRobotNoStop (direction:number, targetSpeed:number, pValue:number) {
-    	
+
 	    	if (input.runningTime() - lastEndTime >= 50) {
 		        if (initialSpeed < targetSpeed) {
 		            initialSpeed = initialSpeed + 1
@@ -532,6 +532,15 @@ namespace CodeRorver {
 
 
 
+   	function callDriveFunction(direction : CodeRoverDriveDirection, speed:number, duration: number, pValue:number, driveSignal:boolean){
+   		
+   		canDriveRobot=driveSignal
+		while(canDriveRobot==true){
+			countHall()
+			driveRobot(direction,speed,duration,pValue)
+		}	
+   	}
+
 
     /**
      * Set the motor speed, direction, pValue and duration.
@@ -543,16 +552,6 @@ namespace CodeRorver {
     //% speed.min=0 speed.max=100
     //% duration.shadow=timePicker
    	//% group="Direction"
-
-   	function callDriveFunction(direction : CodeRoverDriveDirection, speed:number, duration: number, pValue:number, driveSignal:boolean){
-   		
-   		canDriveRobot=driveSignal
-		while(canDriveRobot==true){
-			countHall()
-			driveRobot(direction,speed,duration,pValue)
-		}	
-   	}
-
 
     export function CodeRoverDrive(direction : CodeRoverDriveDirection, speed:number, duration: number) {
     	//need too check for hall sensor 
@@ -577,16 +576,7 @@ namespace CodeRorver {
 
 
 
-    /**
-     * Set the motor speed, Pvalue and direction
-     * @param direction to drive, eg: forward
-     * @param drive speed percentage, eg: 50
-     * @param drive duration, eg: 500
-     */
-    //% block="Drive %direction at %speed for %duration ms"
-    //% speed.min=0 speed.max=100
-    //% duration.shadow=timePicker
-   	//% group="Direction"
+
 
    	function callDriveNoStopFunction(direction : CodeRoverDriveDirection, speed:number, pValue:number, driveSignal:boolean){
    		
@@ -598,13 +588,24 @@ namespace CodeRorver {
    	}
 
 
+   	/**
+     * Set the motor speed, Pvalue and direction
+     * @param direction to drive, eg: forward
+     * @param drive speed percentage, eg: 50
+     * @param drive duration, eg: 500
+     */
+    //% block="Drive %direction at %speed"
+    //% speed.min=0 speed.max=100
+    //% duration.shadow=timePicker
+   	//% group="Direction"
     export function CodeRoverDriveNoStop(direction : CodeRoverDriveDirection, speed:number) {
     	//need too check for hall sensor 
     	//to make sure its going straight 
     	// 让电机不转p6,p7是与led共用
 		led.enable(false)
 		// 霍尔需要先设定p5,p11的pull，防止两个pin是随机电压？
-		canDriveRobotNoStop=false
+		pValue=speed/(speed*0.3)
+		callDriveNoStopFunction(direction,speed,pValue,true)
     }
 
 
@@ -619,12 +620,15 @@ namespace CodeRorver {
     	//to make sure its going straight 
     	// 让电机不转p6,p7是与led共用
 		led.enable(false)
-		// 霍尔需要先设定p5,p11的pull，防止两个pin是随机电压？
-		pins.setPull(DigitalPin.P5, PinPullMode.PullDown)
-		pins.setPull(DigitalPin.P11, PinPullMode.PullDown)
-		pValue=speed/(speed*0.3)
 
-		callDriveNoStopFunction(direction,speed,pValue,true)
+
+		canDriveRobotNoStop = false
+		basic.pause(10)
+    	pins.analogWritePin(AnalogPin.P0, 0)
+	    pins.digitalWritePin(DigitalPin.P6, 0)
+	    pins.analogWritePin(AnalogPin.P1, 0)
+	    pins.digitalWritePin(DigitalPin.P7, 0)
+
     }
 
 
@@ -657,20 +661,21 @@ namespace CodeRorver {
     }
 
 
-    /**
-     * Stop both motors
-     */
-    //% block="Stop both motors"
-    //% group="Motor Speed"
-    export function stopMotors() {
-    	led.enable(false);
+    // /**
+    //  * Stop both motors
+    //  */
+    // //% block="Stop both motors"
+    // //% group="Motor Speed"
+    // export function stopMotors() {
+    // 	led.enable(false);
 
-    	pins.analogWritePin(AnalogPin.P0, 0)
-	    pins.digitalWritePin(DigitalPin.P6, 0)
-	    pins.analogWritePin(AnalogPin.P1, 0)
-	    pins.digitalWritePin(DigitalPin.P7, 0)
+
+    // 	pins.analogWritePin(AnalogPin.P0, 0)
+	   //  pins.digitalWritePin(DigitalPin.P6, 0)
+	   //  pins.analogWritePin(AnalogPin.P1, 0)
+	   //  pins.digitalWritePin(DigitalPin.P7, 0)
     	
-    }
+    // }
 
 
 
