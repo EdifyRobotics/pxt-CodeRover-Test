@@ -83,6 +83,7 @@ namespace CodeRorver {
 	let canDriveRobotNoStop=false 
 	let startDriveTime=0 //this keeps track of duration
 	let lastEndTime = 0 //this keeps track of how often driveRobot function will compare 2 hall sensor counts. 
+	let sonarLastEndTime=0//checks sonar value every 10ms 
 
 	initialSpeed = 0 //initial speed will increase to user inputed target speed. 
 
@@ -251,7 +252,7 @@ namespace CodeRorver {
     //drive robot nonestop 
     function driveRobotNoStop (direction:number, targetSpeed:number, pValue:number) {
 
-	    	if (input.runningTime() - lastEndTime >= 1) {
+	    	if (input.runningTime() - lastEndTime >= 50) {
 		        if (initialSpeed < targetSpeed) {
 		            initialSpeed = initialSpeed + 1
 		            if (initialSpeed > targetSpeed) {
@@ -570,25 +571,6 @@ namespace CodeRorver {
 
 
 
-
-
-
-
-
-
-
-
-   	function callDriveNoStopFunction(direction : CodeRoverDriveDirection, speed:number, pValue:number, driveSignal:boolean){
-   		
-   		canDriveRobotNoStop=driveSignal
-		// while(canDriveRobotNoStop==true){
-		if (canDriveRobotNoStop==true){
-			countHall()
-			driveRobotNoStop(direction,speed,pValue)
-		}
-   	}
-
-
    	/**
      * Set the motor speed, Pvalue and direction
      * @param direction to drive, eg: forward
@@ -606,7 +588,14 @@ namespace CodeRorver {
 		led.enable(false)
 		// 霍尔需要先设定p5,p11的pull，防止两个pin是随机电压？
 		pValue=speed/(speed*0.3)
-		callDriveNoStopFunction(direction,speed,pValue,true)
+
+		canDriveRobotNoStop=true
+
+		// while(canDriveRobotNoStop==true){
+		if (canDriveRobotNoStop==true){
+			countHall()
+			driveRobotNoStop(direction,speed,pValue)
+		}
     }
 
 
@@ -624,7 +613,7 @@ namespace CodeRorver {
 
 
 		// canDriveRobotNoStop = false
-		callDriveNoStopFunction(0,0,0,false)
+		canDriveRobotNoStop=false
 		hall1Count=0
 		hall2Count=0
 
@@ -795,30 +784,35 @@ namespace CodeRorver {
     //ultrasound sensor block is based on small modification and adpotaion of https://github.com/microsoft/pxt-sonar by pelikhan 
 
 	//Sonar and ping utilities
-	//% color="#6fa8dc" 
-	//% group="Sensor Controls"
+
 	/**
-	* Send a ping and get the echo time (in microseconds) as a result
+	* Send a ping and get the echo time (in microseconds) as a result. there is a 10ms pause between each call
 	* @param unit desired conversion unit, eg:Centimeters
 	* @param maxCmDistance maximum distance in centimeters (default is 500)
 	*/
 	//% blockId=sonar_ping block="Ultrasound value: Trig P4 Echo P8| unit %unit"
+	//% color="#6fa8dc" 
+	//% group="Sensor Controls"
 	export function getUltrasoundSensorValue(unit: PingUnit, maxCmDistance = 500): number {
-		// send pulse
-		pins.setPull(DigitalPin.P4, PinPullMode.PullNone);
-		pins.digitalWritePin(DigitalPin.P4, 0);
-		control.waitMicros(2);
-		pins.digitalWritePin(DigitalPin.P4, 1);
-		control.waitMicros(10);
-		pins.digitalWritePin(DigitalPin.P4, 0);
+		if (input.runningTime() - sonarLastEndTime >= 10) { // pause 10ms before next call
 
-		// read pulse
-		const d = pins.pulseIn(DigitalPin.P8, PulseValue.High, maxCmDistance * 58);
+			// send pulse
+			pins.setPull(DigitalPin.P4, PinPullMode.PullNone);
+			pins.digitalWritePin(DigitalPin.P4, 0);
+			control.waitMicros(2);
+			pins.digitalWritePin(DigitalPin.P4, 1);
+			control.waitMicros(10);
+			pins.digitalWritePin(DigitalPin.P4, 0);
 
-		switch (unit) {
-			case PingUnit.Centimeters: return Math.idiv(d, 58);
-			case PingUnit.Inches: return Math.idiv(d, 148);
-			default: return d ;
+			// read pulse
+			const d = pins.pulseIn(DigitalPin.P8, PulseValue.High, maxCmDistance * 58);
+
+			switch (unit) {
+				case PingUnit.Centimeters: return Math.idiv(d, 58);
+				case PingUnit.Inches: return Math.idiv(d, 148);
+				default: return d ;
+			}
+			sonarLastEndTime = input.runningTime()
 		}
 	}
 	
@@ -827,18 +821,21 @@ namespace CodeRorver {
 
 
 	//IR aka line tracing sensor util right sensor conenct to P3 control motorp0p6 Left sensor connect to P2 control motor p1p7
-	//% color="#6fa8dc"
-	//% group="Sensor Controls"
 	/**
 	* read left and right IR sensor value turns 1 on white surface returns 0 on black surface.
 	* @param choose to read value from left or right IR sensor
 	*/
 	//% block="%IRPin IR sensor value"
+	//% color="#6fa8dc"
+	//% group="Sensor Controls"
 	export function getIRSensorValue(IRChoice: IRPins ): number {
+
+		
 		switch(IRChoice){
 			case IRPins.left: return pins.digitalReadPin(DigitalPin.P2);
 			case IRPins.right: return pins.digitalReadPin(DigitalPin.P3);
 		}
+			
 
 	 }
 
