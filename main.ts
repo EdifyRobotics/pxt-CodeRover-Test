@@ -795,6 +795,7 @@ namespace CodeRorver {
 	//% group="Sensor Controls"
 	export function getUltrasoundSensorValue(unit: PingUnit, maxCmDistance = 500): number {
 		if (input.runningTime() - sonarLastEndTime >= 10) { // pause 10ms before next call
+			sonarLastEndTime = input.runningTime()
 
 			// send pulse
 			pins.setPull(DigitalPin.P4, PinPullMode.PullNone);
@@ -812,12 +813,14 @@ namespace CodeRorver {
 				case PingUnit.Inches: return Math.idiv(d, 148);
 				default: return d ;
 			}
-			sonarLastEndTime = input.runningTime()
 		}
 		else{
 			return -1000
 		}
 	}
+
+
+
 	
 	//ultrasound sensor block is based on small modification and adpotaion of https://github.com/microsoft/pxt-sonar by pelikhan 
 
