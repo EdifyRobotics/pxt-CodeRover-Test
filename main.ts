@@ -834,10 +834,10 @@ namespace CodeRorver {
 	export function getIRSensorValue(IRChoice: IRPins ): number {
 
 		
-		// switch(IRChoice){
-		// 	case IRPins.left: return pins.digitalReadPin(DigitalPin.P2);
-		// 	case IRPins.right: return pins.digitalReadPin(DigitalPin.P3);
-		// }
+		switch(IRChoice){
+			case IRPins.left: return pins.digitalReadPin(DigitalPin.P2);
+			case IRPins.right: return pins.digitalReadPin(DigitalPin.P3);
+		}
 			
 
 	 }
