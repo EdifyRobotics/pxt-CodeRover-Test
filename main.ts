@@ -251,7 +251,7 @@ namespace CodeRorver {
     //drive robot nonestop 
     function driveRobotNoStop (direction:number, targetSpeed:number, pValue:number) {
 
-	    	if (input.runningTime() - lastEndTime >= 10) {
+	    	if (input.runningTime() - lastEndTime >= 1) {
 		        if (initialSpeed < targetSpeed) {
 		            initialSpeed = initialSpeed + 1
 		            if (initialSpeed > targetSpeed) {
@@ -583,8 +583,6 @@ namespace CodeRorver {
    		canDriveRobotNoStop=driveSignal
 		// while(canDriveRobotNoStop==true){
 		if (canDriveRobotNoStop==true){
-			hall1Count=0
-			hall2Count=0
 			countHall()
 			driveRobotNoStop(direction,speed,pValue)
 		}
