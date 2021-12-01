@@ -795,7 +795,6 @@ namespace CodeRorver {
 	//% group="Sensor Controls"
 	export function getUltrasoundSensorValue(unit: PingUnit, maxCmDistance = 500): number {
 		if (input.runningTime() - sonarLastEndTime >= 10) { // pause 10ms before next call
-			sonarLastEndTime = input.runningTime()
 
 			// send pulse
 			pins.setPull(DigitalPin.P4, PinPullMode.PullNone);
@@ -807,6 +806,8 @@ namespace CodeRorver {
 
 			// read pulse
 			const d = pins.pulseIn(DigitalPin.P8, PulseValue.High, maxCmDistance * 58);
+			
+			sonarLastEndTime = input.runningTime()
 
 			switch (unit) {
 				case PingUnit.Centimeters: return Math.idiv(d, 58);
