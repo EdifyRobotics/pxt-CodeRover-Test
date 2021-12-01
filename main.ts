@@ -622,7 +622,10 @@ namespace CodeRorver {
 		led.enable(false)
 
 
-		canDriveRobotNoStop = false
+		// canDriveRobotNoStop = false
+		callDriveNoStopFunction(0,0,0,false)
+
+
 		basic.pause(10)
     	pins.analogWritePin(AnalogPin.P0, 0)
 	    pins.digitalWritePin(DigitalPin.P6, 0)
