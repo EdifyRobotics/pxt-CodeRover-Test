@@ -813,6 +813,7 @@ namespace CodeRorver {
 			// 	case PingUnit.Inches: return Math.idiv(d, 148);
 			// 	default: return d ;
 			// }
+			sonarLastEndTime = input.runningTime()
 
 			if(unit==PingUnit.Centimeters){
 				return Math.idiv(d, 58);
@@ -824,7 +825,6 @@ namespace CodeRorver {
 				return d ;
 
 			}
-			sonarLastEndTime = input.runningTime()
 
 		}
 		else{
