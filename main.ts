@@ -59,6 +59,25 @@
 	}
 
 
+	enum IRValue{
+	   //% block="●" enumval=0
+        TrackingOn,
+        //% block="◌" enumval=1
+        TrackingOff,
+	}
+
+	enum bothIRValue{
+		//% block="● ●" enumval=0
+        Tracking_State_0,
+        //% block="● ◌" enumval=1
+        Tracking_State_1,
+        //% block="◌ ●" enumval=2
+        Tracking_State_2,
+        //% block="◌ ◌" enumval=3
+        Tracking_State_3
+	}
+
+
 
 
 //% color="#FEC700"
@@ -782,9 +801,6 @@ namespace CodeRorver {
 
 
     //ultrasound sensor block is based on small modification and adpotaion of https://github.com/microsoft/pxt-sonar by pelikhan 
-
-	//Sonar and ping utilities
-
 	/**
 	* Send a ping and get the echo time (in microseconds) as a result. there is a 10ms pause between each call
 	* @param unit desired conversion unit, eg:Centimeters
@@ -793,6 +809,9 @@ namespace CodeRorver {
 	//% blockId=sonar_ping block="Ultrasound value: Trig P4 Echo P8| unit %unit"
 	//% color="#6fa8dc" 
 	//% group="Sensor Controls"
+
+
+	//potential bug: turns to the right after a while 
 	export function getUltrasoundSensorValue(unit: PingUnit, maxCmDistance = 500): number {
 		if (input.runningTime() - sonarLastEndTime >= 10) { // pause 10ms before next call
 
@@ -859,6 +878,38 @@ namespace CodeRorver {
 	 }
 
 
+
+	//IR aka line tracing sensor util right sensor conenct to P3 control motorp0p6 Left sensor connect to P2 control motor p1p7
+	/**
+	* read left and right IR sensor value returns true or false based on selection.
+	* @param choose to read value from left or right IR sensor
+	* @param choose the IR state, while or black
+	*/
+	//% block="%IRPin IR sensor value"
+	//% color="#6fa8dc"
+	//% group="Sensor Controls"
+	export function checkIRSensor(IRChoice: IRPins, IRValue:IRValue): boolean {
+
+		if(IRChoice==IRPins.left){
+			if(pins.digitalReadPin(DigitalPin.P2)==1 && IRValue==IRValue.TrackingOn){
+				return true
+			}
+			else{
+				return false 
+			}
+		}
+		else if(IRChoice==IRPins.right){
+			if(pins.digitalReadPin(DigitalPin.P3)==1 && IRValue==IRValue.TrackingOn){
+				return true
+			}
+			else{
+				return false 
+			}
+		}
+
+			
+
+	 }
 
 
 }	
