@@ -625,9 +625,11 @@ namespace CodeRorver {
 
 		// canDriveRobotNoStop = false
 		callDriveNoStopFunction(0,0,0,false)
+		hall1Count=0
+		hall2Count=0
 
 
-		basic.pause(10)
+		// basic.pause(10)
     	pins.analogWritePin(AnalogPin.P0, 0)
 	    pins.digitalWritePin(DigitalPin.P6, 0)
 	    pins.analogWritePin(AnalogPin.P1, 0)
