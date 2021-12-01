@@ -80,6 +80,7 @@ namespace CodeRorver {
 	let initialSpeed = 0 
 	let pValue=0
 	let canDriveRobot=false 
+	let canDriveRobotNoStop=false 
 	let startDriveTime=0 //this keeps track of duration
 	let lastEndTime = 0 //this keeps track of how often driveRobot function will compare 2 hall sensor counts. 
 
@@ -247,6 +248,129 @@ namespace CodeRorver {
 
 
 
+    //drive robot nonestop 
+    function driveRobotNoStop (direction:number, targetSpeed:number, pValue:number) {
+    	
+	    	if (input.runningTime() - lastEndTime >= 50) {
+		        if (initialSpeed < targetSpeed) {
+		            initialSpeed = initialSpeed + 1
+		            if (initialSpeed > targetSpeed) {
+		                initialSpeed = targetSpeed
+		            }
+		        }
+		        //move forward straight 
+		       	if (direction==CodeRoverDriveDirection.Forward){
+		       		if (hall1Count < hall2Count) {
+			            fasterSpeed = initialSpeed + pValue * (hall2Count - hall1Count)
+			            slowerSpeed = initialSpeed - pValue * (hall2Count - hall1Count)
+			            // fasterSpeed=20
+			            // slowerSpeed=0
+			            if (fasterSpeed > 70) { //limit max speed to 70% and min speed to 10%
+			                fasterSpeed = 70
+			            }
+			            if (slowerSpeed < 0) {
+			                slowerSpeed = 10
+			            }
+			            // p0p6 is faster than p1p7, p0p6 slow down
+			            pins.analogWritePin(AnalogPin.P0, 1023 - Math.round(1023 * slowerSpeed / 100))
+			            pins.digitalWritePin(DigitalPin.P6, 1)
+			            // left side counter-clockwise
+			            pins.analogWritePin(AnalogPin.P1, Math.round(1023 * fasterSpeed / 100))
+			            pins.digitalWritePin(DigitalPin.P7, 0)
+			            pins.digitalWritePin(DigitalPin.P3, 0)
+			            pins.digitalWritePin(DigitalPin.P9, 1)
+			        } else if (hall1Count > hall2Count) {
+			            // right side slower
+			            fasterSpeed = initialSpeed + pValue * (hall1Count - hall2Count)
+			            slowerSpeed = initialSpeed - pValue * (hall1Count - hall2Count)
+			            // fasterSpeed=20
+			            // slowerSpeed=0
+			            if (fasterSpeed > 70) { //limit max speed to 70% and min speed to 10%
+			                fasterSpeed = 70
+			            }
+			            if (slowerSpeed < 0) {
+			                slowerSpeed = 10
+			            }
+			            // p0p6 is slower than p1p7, p0p6 speed up
+			            pins.analogWritePin(AnalogPin.P0, 1023 - Math.round(1023 * fasterSpeed / 100))
+			            pins.digitalWritePin(DigitalPin.P6, 1)
+			            // left side counter-clockwise
+			            pins.analogWritePin(AnalogPin.P1, Math.round(1023 * slowerSpeed / 100))
+			            pins.digitalWritePin(DigitalPin.P7, 0)
+			            pins.digitalWritePin(DigitalPin.P3, 1)
+			            pins.digitalWritePin(DigitalPin.P9, 1)
+			        } else {
+			            // p0p6 is the same as p1p7
+			            pins.analogWritePin(AnalogPin.P0, 1023 - Math.round(1023 * initialSpeed / 100))
+			            pins.digitalWritePin(DigitalPin.P6, 1)
+			            // left side counter-clockwise
+			            pins.analogWritePin(AnalogPin.P1, Math.round(1023 * initialSpeed / 100))
+			            pins.digitalWritePin(DigitalPin.P7, 0)
+			            pins.digitalWritePin(DigitalPin.P3, 0)
+			            pins.digitalWritePin(DigitalPin.P9, 0)
+			        }
+		       	}
+		       	//move backward straight
+		       	else if(direction==CodeRoverDriveDirection.Backward){
+		       		if (hall1Count < hall2Count) {
+			            fasterSpeed = initialSpeed + pValue * (hall2Count - hall1Count)
+			            slowerSpeed = initialSpeed - pValue * (hall2Count - hall1Count)
+			            if (fasterSpeed > 70) { //limit max speed to 70% and min speed to 10%
+			                fasterSpeed = 70
+			            }
+			            if (slowerSpeed < 0) {
+			                slowerSpeed = 10
+			            }
+			            // p0p6 is faster than p1p7, p0p6 slow down
+			            pins.analogWritePin(AnalogPin.P1, 1023 - Math.round(1023 * slowerSpeed / 100))
+			            pins.digitalWritePin(DigitalPin.P7, 1)
+			            // left side counter-clockwise
+			            pins.analogWritePin(AnalogPin.P0, Math.round(1023 * fasterSpeed / 100))
+			            pins.digitalWritePin(DigitalPin.P6, 0)
+			            // pins.digitalWritePin(DigitalPin.P3, 0)
+			            // pins.digitalWritePin(DigitalPin.P9, 1)
+			        } else if (hall1Count > hall2Count) {
+			            // right side slower
+			            fasterSpeed = initialSpeed + pValue * (hall1Count - hall2Count)
+			            slowerSpeed = initialSpeed - pValue * (hall1Count - hall2Count)
+			            if (fasterSpeed > 70) { //limit max speed to 70% and min speed to 10%
+			                fasterSpeed = 70
+			            }
+			            if (slowerSpeed < 0) {
+			                slowerSpeed = 10
+			            }
+			            // p0p6 is slower than p1p7, p0p6 speed up
+			            pins.analogWritePin(AnalogPin.P1, 1023 - Math.round(1023 * fasterSpeed / 100))
+			            pins.digitalWritePin(DigitalPin.P7, 1)
+			            // left side counter-clockwise
+			            pins.analogWritePin(AnalogPin.P0, Math.round(1023 * slowerSpeed / 100))
+			            pins.digitalWritePin(DigitalPin.P6, 0)
+			            // pins.digitalWritePin(DigitalPin.P3, 1)
+			            // pins.digitalWritePin(DigitalPin.P9, 1)
+			        } else {
+			            // p0p6 is the same as p1p7
+			            pins.analogWritePin(AnalogPin.P1, 1023 - Math.round(1023 * initialSpeed / 100))
+			            pins.digitalWritePin(DigitalPin.P7, 1)
+			            // left side counter-clockwise
+			            pins.analogWritePin(AnalogPin.P0, Math.round(1023 * initialSpeed / 100))
+			            pins.digitalWritePin(DigitalPin.P6, 0)
+			            // pins.digitalWritePin(DigitalPin.P3, 0)
+			            // pins.digitalWritePin(DigitalPin.P9, 0)
+			        }
+		       	}
+		        
+		        lastEndTime = input.runningTime()
+		    }
+	    
+	}
+    //counter function to keep motor going on a straight line 
+
+
+
+    //drive robot nonestop
+
+
+
 
 
     //turning 
@@ -381,6 +505,16 @@ namespace CodeRorver {
     //% degree.min=0 degree.max=360
    	//% group="Direction"
 
+   	function callTurningFunction(degree : number, turnChoice: CodeRoverTurnDirection, turnSignal:boolean){
+   		//set keepTurning to true after duration set it to false 
+   		keepTurning=turnSignal
+
+		while(keepTurning==true){
+			countHall()
+			turnRobot(turnChoice,degree)
+		}	
+   	}
+
     export function CodeRoverTurn(degree : number, turnChoice: CodeRoverTurnDirection) {
     	//need to check for hall sensor 
     	//to make sure its turning the correct degree 
@@ -391,12 +525,7 @@ namespace CodeRorver {
 		pins.setPull(DigitalPin.P11, PinPullMode.PullDown)
 		pValue=turnSpeed/(turnSpeed*0.3)
 
-		keepTurning=true
-		//set canDriveRobot to true after duration set it to false 
-		while(keepTurning==true){
-			countHall()
-			turnRobot(turnChoice,degree)
-		}	
+		callTurningFunction(degree,turnChoice,true)
     }
 
 
@@ -405,7 +534,7 @@ namespace CodeRorver {
 
 
     /**
-     * Set the motor speed and direction
+     * Set the motor speed, direction, pValue and duration.
      * @param direction to drive, eg: forward
      * @param drive speed percentage, eg: 50
      * @param drive duration, eg: 500
@@ -415,7 +544,14 @@ namespace CodeRorver {
     //% duration.shadow=timePicker
    	//% group="Direction"
 
-
+   	function callDriveFunction(direction : CodeRoverDriveDirection, speed:number, duration: number, pValue:number, driveSignal:boolean){
+   		
+   		canDriveRobot=driveSignal
+		while(canDriveRobot==true){
+			countHall()
+			driveRobot(direction,speed,duration,pValue)
+		}	
+   	}
 
 
     export function CodeRoverDrive(direction : CodeRoverDriveDirection, speed:number, duration: number) {
@@ -428,13 +564,71 @@ namespace CodeRorver {
 		pins.setPull(DigitalPin.P11, PinPullMode.PullDown)
 		pValue=speed/(speed*0.3)
 
-		//set canDriveRobot to true after duration set it to false 
-		canDriveRobot=true
-		while(canDriveRobot==true){
-			countHall()
-			driveRobot(direction,speed,duration,pValue)
-		}	
+		callDriveFunction(direction,speed,duration,pValue,true)
     }
+
+
+
+
+
+
+
+
+
+
+
+    /**
+     * Set the motor speed, Pvalue and direction
+     * @param direction to drive, eg: forward
+     * @param drive speed percentage, eg: 50
+     * @param drive duration, eg: 500
+     */
+    //% block="Drive %direction at %speed for %duration ms"
+    //% speed.min=0 speed.max=100
+    //% duration.shadow=timePicker
+   	//% group="Direction"
+
+   	function callDriveNoStopFunction(direction : CodeRoverDriveDirection, speed:number, pValue:number, driveSignal:boolean){
+   		
+   		canDriveRobotNoStop=driveSignal
+		while(canDriveRobotNoStop==true){
+			countHall()
+			driveRobotNoStop(direction,speed,pValue)
+		}	
+   	}
+
+
+    export function CodeRoverDriveNoStop(direction : CodeRoverDriveDirection, speed:number) {
+    	//need too check for hall sensor 
+    	//to make sure its going straight 
+    	// 让电机不转p6,p7是与led共用
+		led.enable(false)
+		// 霍尔需要先设定p5,p11的pull，防止两个pin是随机电压？
+		canDriveRobotNoStop=false
+    }
+
+
+
+    /**
+     * stop codeRover movement 
+     */
+    //% block="Stop CodeRover"
+   	//% group="Direction"
+    export function CodeRoverStop() {
+    	//need too check for hall sensor 
+    	//to make sure its going straight 
+    	// 让电机不转p6,p7是与led共用
+		led.enable(false)
+		// 霍尔需要先设定p5,p11的pull，防止两个pin是随机电压？
+		pins.setPull(DigitalPin.P5, PinPullMode.PullDown)
+		pins.setPull(DigitalPin.P11, PinPullMode.PullDown)
+		pValue=speed/(speed*0.3)
+
+		callDriveNoStopFunction(direction,speed,pValue,true)
+    }
+
+
+
 
 
     /**
@@ -460,6 +654,22 @@ namespace CodeRorver {
 			pins.digitalWritePin(DigitalPin.P7, 0);
 
     	}
+    }
+
+
+    /**
+     * Stop both motors
+     */
+    //% block="Stop both motors"
+    //% group="Motor Speed"
+    export function stopMotors() {
+    	led.enable(false);
+
+    	pins.analogWritePin(AnalogPin.P0, 0)
+	    pins.digitalWritePin(DigitalPin.P6, 0)
+	    pins.analogWritePin(AnalogPin.P1, 0)
+	    pins.digitalWritePin(DigitalPin.P7, 0)
+    	
     }
 
 
@@ -609,7 +819,7 @@ namespace CodeRorver {
 	//% color="#6fa8dc"
 	//% group="Sensor Controls"
 	/**
-	* read left and right IR sensor value 
+	* read left and right IR sensor value turns 1 on white surface returns 0 on black surface.
 	* @param choose to read value from left or right IR sensor
 	*/
 	//% block="%IRPin IR sensor value"
