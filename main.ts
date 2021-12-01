@@ -807,12 +807,25 @@ namespace CodeRorver {
 			// read pulse
 			const d = pins.pulseIn(DigitalPin.P8, PulseValue.High, maxCmDistance * 58);
 			
-			sonarLastEndTime = input.runningTime()
 
-			switch (unit) {
-				case PingUnit.Centimeters: return Math.idiv(d, 58);
-				case PingUnit.Inches: return Math.idiv(d, 148);
-				default: return d ;
+			// switch (unit) {
+			// 	case PingUnit.Centimeters: return Math.idiv(d, 58);
+			// 	case PingUnit.Inches: return Math.idiv(d, 148);
+			// 	default: return d ;
+			// }
+
+			if(unit==PingUnit.Centimeters){
+				sonarLastEndTime = input.runningTime()
+				return Math.idiv(d, 58);
+			}
+			else if(unit == PingUnit.Inches){
+				sonarLastEndTime = input.runningTime()
+				return Math.idiv(d, 148);
+			}
+			else{
+				sonarLastEndTime = input.runningTime()
+				return d ;
+
 			}
 		}
 		else{
