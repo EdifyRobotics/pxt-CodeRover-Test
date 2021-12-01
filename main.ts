@@ -814,6 +814,9 @@ namespace CodeRorver {
 			}
 			sonarLastEndTime = input.runningTime()
 		}
+		else{
+			return -1000
+		}
 	}
 	
 	//ultrasound sensor block is based on small modification and adpotaion of https://github.com/microsoft/pxt-sonar by pelikhan 
@@ -831,10 +834,10 @@ namespace CodeRorver {
 	export function getIRSensorValue(IRChoice: IRPins ): number {
 
 		
-		switch(IRChoice){
-			case IRPins.left: return pins.digitalReadPin(DigitalPin.P2);
-			case IRPins.right: return pins.digitalReadPin(DigitalPin.P3);
-		}
+		// switch(IRChoice){
+		// 	case IRPins.left: return pins.digitalReadPin(DigitalPin.P2);
+		// 	case IRPins.right: return pins.digitalReadPin(DigitalPin.P3);
+		// }
 			
 
 	 }
