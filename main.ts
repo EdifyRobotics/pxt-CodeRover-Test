@@ -863,7 +863,7 @@ namespace CodeRorver {
 	* read left and right IR sensor value turns 1 on white surface returns 0 on black surface.
 	* @param choose to read value from left or right IR sensor
 	*/
-	//% block="%IRPin IR sensor value"
+	//% block="%IRChoice IR sensor value"
 	//% color="#6fa8dc"
 	//% group="Sensor Controls"
 	export function getIRSensorValue(IRChoice: IRPins ): number {
@@ -885,13 +885,13 @@ namespace CodeRorver {
 	* @param choose to read value from left or right IR sensor
 	* @param choose the IR state, while or black
 	*/
-	//% block="%IRPin IR sensor value"
+	//% block="%IRChoice IR sensor value is %IValueChoice"
 	//% color="#6fa8dc"
 	//% group="Sensor Controls"
-	export function checkIRSensor(IRChoice: IRPins, IRValue:IRValue): boolean {
+	export function checkIRSensor(IRChoice: IRPins, IValueChoice:IRValue): boolean {
 
 		if(IRChoice==IRPins.left){
-			if(pins.digitalReadPin(DigitalPin.P2)==1 && IRValue==IRValue.TrackingOn){
+			if(pins.digitalReadPin(DigitalPin.P2)==1 && IValueChoice==IRValue.TrackingOn){
 				return true
 			}
 			else{
@@ -899,12 +899,15 @@ namespace CodeRorver {
 			}
 		}
 		else if(IRChoice==IRPins.right){
-			if(pins.digitalReadPin(DigitalPin.P3)==1 && IRValue==IRValue.TrackingOn){
+			if(pins.digitalReadPin(DigitalPin.P3)==1 && IValueChoice==IRValue.TrackingOn){
 				return true
 			}
 			else{
 				return false 
 			}
+		}
+		else{
+			return false
 		}
 
 			
