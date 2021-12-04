@@ -816,7 +816,7 @@ namespace CodeRorver {
 
 	//potential bug: turns to the right after a while 
 	export function getUltrasoundSensorValue(unit: PingUnit, maxCmDistance = 500): number {
-		if (input.runningTime() - sonarLastEndTime >= 10) { // pause 10ms before next call
+		if (input.runningTime() - sonarLastEndTime >= 20) { // pause 10ms before next call
 
 			// send pulse
 			pins.setPull(DigitalPin.P4, PinPullMode.PullNone);
@@ -888,13 +888,13 @@ namespace CodeRorver {
 	* @param choose to read value from left or right IR sensor
 	* @param choose the IR state, while or black
 	*/
-	//% block="%IRChoice IR sensor value is %IValueChoice"
+	//% block="%IRChoice IR sensor value is %IRValueChoice"
 	//% color="#6fa8dc"
 	//% group="Sensor Controls"
-	export function checkIRSensor(IRChoice: IRPins, IValueChoice:IRValue): boolean {
+	export function checkIRSensor(IRChoice: IRPins, IRValueChoice:IRValue): boolean {
 
 		if(IRChoice==IRPins.left){
-			if(pins.digitalReadPin(DigitalPin.P2)==1 && IValueChoice==IRValue.TrackingOn){
+			if(pins.digitalReadPin(DigitalPin.P2)==1 && IRValueChoice==IRValue.TrackingOn){
 				return true
 			}
 			else{
@@ -902,7 +902,7 @@ namespace CodeRorver {
 			}
 		}
 		else if(IRChoice==IRPins.right){
-			if(pins.digitalReadPin(DigitalPin.P3)==1 && IValueChoice==IRValue.TrackingOn){
+			if(pins.digitalReadPin(DigitalPin.P3)==1 && IRValueChoice==IRValue.TrackingOn){
 				return true
 			}
 			else{
