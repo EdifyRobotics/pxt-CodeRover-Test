@@ -819,7 +819,6 @@ namespace CodeRorver {
 		if (input.runningTime() - sonarLastEndTime >= 20) { // pause 10ms before next call
 
 
-			sonarLastEndTime = input.runningTime()
 
 			// send pulse
 			pins.setPull(DigitalPin.P4, PinPullMode.PullNone);
@@ -838,6 +837,9 @@ namespace CodeRorver {
 			// 	case PingUnit.Inches: return Math.idiv(d, 148);
 			// 	default: return d ;
 			// }
+
+
+			sonarLastEndTime = input.runningTime()
 
 			if(unit==PingUnit.Centimeters){
 				return Math.idiv(d, 58);
