@@ -816,7 +816,7 @@ namespace CodeRorver {
 
 	//potential bug: turns to the right after a while 
 	export function getUltrasoundSensorValue(unit: PingUnit, maxCmDistance = 500): number {
-		if (input.runningTime() - sonarLastEndTime >= 20) { // pause 10ms before next call
+		if (input.runningTime() - sonarLastEndTime >= 1000) { // pause 10ms before next call
 
 
 
