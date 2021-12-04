@@ -516,14 +516,9 @@ namespace CodeRorver {
 	    }
    	}
 
-    /**
-     * Set the motor speed and direction
-     * @param direction to perform the spin, eg: left
-     * @param degree need to turn, eg: 45
-     */
-    //% block="Turn %degree degrees to the %turnChoice"
-    //% degree.min=0 degree.max=360
-   	//% group="Direction"
+
+
+
 
    	function callTurningFunction(degree : number, turnChoice: CodeRoverTurnDirection, turnSignal:boolean){
    		//set keepTurning to true after duration set it to false 
@@ -535,6 +530,14 @@ namespace CodeRorver {
 		}	
    	}
 
+    /**
+     * Set the motor speed and direction
+     * @param direction to perform the spin, eg: left
+     * @param degree need to turn, eg: 45
+     */
+    //% block="Turn %degree degrees to the %turnChoice"
+    //% degree.min=0 degree.max=360
+   	//% group="Direction"
     export function CodeRoverTurn(degree : number, turnChoice: CodeRoverTurnDirection) {
     	//need to check for hall sensor 
     	//to make sure its turning the correct degree 
