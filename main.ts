@@ -271,7 +271,7 @@ namespace CodeRorver {
     //drive robot nonestop 
     function driveRobotNoStop (direction:number, targetSpeed:number, pValue:number) {
 
-	    	if (input.runningTime() - lastEndTime >= 50) {
+	    	if (input.runningTime() - lastEndTime >= 10) {
 		        if (initialSpeed < targetSpeed) {
 		            initialSpeed = initialSpeed + 1
 		            if (initialSpeed > targetSpeed) {
@@ -816,7 +816,7 @@ namespace CodeRorver {
 
 	//potential bug: turns to the right after a while 
 	export function getUltrasoundSensorValue(unit: PingUnit, maxCmDistance = 500): number {
-		if (input.runningTime() - sonarLastEndTime >= 10) { // pause 10ms before next call
+		if (input.runningTime() - sonarLastEndTime >= 30) { // pause 30ms before next call
 
 
 
