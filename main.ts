@@ -271,6 +271,8 @@ namespace CodeRorver {
     //drive robot nonestop 
     function driveRobotNoStop (direction:number, targetSpeed:number, pValue:number) {
 
+    		//drive robot nonestop function nest within ultrasound sensor check value function 
+    		//ultrasound checks every 30ms, drive function works best if its called every 10ms. 
 	    	if (input.runningTime() - lastEndTime >= 10) {
 		        if (initialSpeed < targetSpeed) {
 		            initialSpeed = initialSpeed + 1
@@ -901,12 +903,18 @@ namespace CodeRorver {
 			if(pins.digitalReadPin(DigitalPin.P2)==1 && IRValueChoice==IRValue.TrackingOn){
 				return true
 			}
+			else if(pins.digitalReadPin(DigitalPin.P2)==0 && IRValueChoice==IRValue.TrackingOff){
+				return true
+			}
 			else{
 				return false 
 			}
 		}
 		else if(IRChoice==IRPins.right){
 			if(pins.digitalReadPin(DigitalPin.P3)==1 && IRValueChoice==IRValue.TrackingOn){
+				return true
+			}
+			else if(pins.digitalReadPin(DigitalPin.P3)==0 && IRValueChoice==IRValue.TrackingOff){
 				return true
 			}
 			else{
