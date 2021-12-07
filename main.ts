@@ -709,6 +709,7 @@ namespace CodeRorver {
     //% group="Motor Speed"
     //% duration.shadow=timePicker
     //% speed.min=0 speed.max=100
+    
     export function setRightMotorSpeed(direction: MotorShaftDirection,speed: number) {
     	led.enable(false);
 
