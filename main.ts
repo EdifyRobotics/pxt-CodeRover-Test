@@ -90,11 +90,59 @@
         Tracking_State_3
 	}
 
+	/**
+	  * Pre-Defined LED colours
+	  */
+	// enum BBColors
+	// {
+	//     //% block=red
+	//     Red = 0xff0000,
+	//     //% block=orange
+	//     Orange = 0xffa500,
+	//     //% block=yellow
+	//     Yellow = 0xffff00,
+	//     //% block=green
+	//     Green = 0x00ff00,
+	//     //% block=blue
+	//     Blue = 0x0000ff,
+	//     //% block=indigo
+	//     Indigo = 0x4b0082,
+	//     //% block=violet
+	//     Violet = 0x8a2be2,
+	//     //% block=purple
+	//     Purple = 0xff00ff,
+	//     //% block=white
+	//     White = 0xffffff,
+	//     //% block=black
+	//     Black = 0x000000
+	// }
+
+	enum RGBColors
+	{
+	    //% block=red
+	    Red = 0xff0000,
+	    //% block=green
+	    Green = 0x00ff00,
+	    //% block=blue
+	    Blue = 0x0000ff,
+	    //% block=yellow
+	    Yellow = 0xffff00,
+	    //% block=violet
+	    Violet = 0xff00ff,
+	   	//% block=turquoise
+	    turquoise = 0x00fff,
+	    //% block=white
+	    White = 0xffffff,
+	}
+
+
+
+
 
 
 
 //% color="#FEC700"
-//% groups="['Motor Speed', 'Motor Duration', 'Direction', 'Sensor Controls', 'Servo Controls', 'RGB controls']"
+//% groups="['Motor Speed', 'Motor Duration', 'Direction', 'Sensor Controls', 'Servo Controls', 'RGB controls', 'RGB']"
 namespace CodeRorver {
 
 	//attention!!! when p6 and p7 is set to 1, pwm is inverse, meaning 1023 is stop.
@@ -939,9 +987,45 @@ namespace CodeRorver {
 			return false
 		}
 
-			
+	}
 
-	 }
+
+	/**
+      * Sets all LEDs to a given color (range 0-255 for r, g, b).
+      * @param rgb RGB color of the LED
+      */
+    //% blockId="setRGB" block="set RGB color to%rgb=bb_colours"
+    //% weight=100
+    //% group="RGB"
+    //% blockGap=8
+    export function setRGBColor(rgb: number)
+    {
+        // fire().setBand(rgb);
+        // updateLEDs();
+    }
+    
+   /**
+      * Get numeric value of colour
+      * @param color Standard RGB Led Colours eg: #ff0000
+      */
+    //% blockId="bb_colours" block=%color
+    //% blockHidden=false
+    //% weight=70
+    //% group="RGB"
+    //% blockGap=8
+    //% shim=TD_ID colorSecondary="#e7660b"
+    //% color.fieldEditor="colornumber"
+    //% color.fieldOptions.decompileLiterals=true
+    //% color.defl='#ff0000'
+    //% color.fieldOptions.colours='["#ff0000","#00ff00","#0000ff","#ffff00","#ff00ff","#00ffff","#ffffff"]'
+    //% color.fieldOptions.columns=5
+    //% color.fieldOptions.className='rgbColorPicker'
+
+
+    export function getColorValue(color: number): number
+    {
+        return color;
+    }
 
 
 }	
