@@ -994,21 +994,67 @@ namespace CodeRorver {
       * Sets all LEDs to a given color (range 0-255 for r, g, b).
       * @param rgb RGB color of the LED
       */
-    //% blockId="setRGB" block="set RGB color to%rgb=bb_colours"
+    //% blockId="setRGB" block="set RGB color to%rgb=RGBColor"
     //% weight=100
     //% group="RGB"
     //% blockGap=8
     export function setRGBColor(rgb: number)
     {
+    	led.enable(false);
+
         // fire().setBand(rgb);
         // updateLEDs();
+        //red
+        if(rgb==16711680){
+        	pins.digitalWritePin(DigitalPin.P9, 1);
+        	pins.digitalWritePin(DigitalPin.P6, 0);
+        	pins.digitalWritePin(DigitalPin.P7, 0);
+
+        }
+        //Green
+        else if(rgb==65280){
+        	pins.digitalWritePin(DigitalPin.P9, 0);
+        	pins.digitalWritePin(DigitalPin.P6, 1);
+        	pins.digitalWritePin(DigitalPin.P7, 0);
+        }
+        //blue
+        else if(rgb==255){
+        	pins.digitalWritePin(DigitalPin.P9, 0);
+        	pins.digitalWritePin(DigitalPin.P6, 0);
+        	pins.digitalWritePin(DigitalPin.P7, 1);
+        }
+        //yellow
+        else if(rgb==16776960){
+        	pins.digitalWritePin(DigitalPin.P9, 1);
+        	pins.digitalWritePin(DigitalPin.P6, 1);
+        	pins.digitalWritePin(DigitalPin.P7, 0);
+        }
+        //purple
+        else if(rgb==16711935){
+        	pins.digitalWritePin(DigitalPin.P9, 1);
+        	pins.digitalWritePin(DigitalPin.P6, 0);
+        	pins.digitalWritePin(DigitalPin.P7, 1);
+        }
+        //turquoise
+        else if(rgb==65535){
+        	pins.digitalWritePin(DigitalPin.P9, 0);
+        	pins.digitalWritePin(DigitalPin.P6, 1);
+        	pins.digitalWritePin(DigitalPin.P7, 1);
+        }
+        //white 
+        else if(rgb==16777215){
+        	pins.digitalWritePin(DigitalPin.P9, 1);
+        	pins.digitalWritePin(DigitalPin.P6, 1);
+        	pins.digitalWritePin(DigitalPin.P7, 1);
+        }
+
     }
-    
+
    /**
       * Get numeric value of colour
       * @param color Standard RGB Led Colours eg: #ff0000
       */
-    //% blockId="bb_colours" block=%color
+    //% blockId="RGBColor" block=%color
     //% blockHidden=false
     //% weight=70
     //% group="RGB"
@@ -1018,12 +1064,14 @@ namespace CodeRorver {
     //% color.fieldOptions.decompileLiterals=true
     //% color.defl='#ff0000'
     //% color.fieldOptions.colours='["#ff0000","#00ff00","#0000ff","#ffff00","#ff00ff","#00ffff","#ffffff"]'
-    //% color.fieldOptions.columns=5
+    //% color.fieldOptions.columns=7
     //% color.fieldOptions.className='rgbColorPicker'
 
 
     export function getColorValue(color: number): number
     {
+    	// let hexStr = color.toString(16); tostring does not work on makecode, yet?
+
         return color;
     }
 
