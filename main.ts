@@ -1025,14 +1025,14 @@ namespace CodeRorver {
         }
         //yellow 
         else if(rgb==16776960){
-        	pins.digitalWritePin(DigitalPin.P9, 1);
-        	pins.digitalWritePin(DigitalPin.P6, 0);
-        	pins.digitalWritePin(DigitalPin.P7, 0);
-        }
-        //purple -- 
-        else if(rgb==16711935){
         	pins.digitalWritePin(DigitalPin.P9, 0);
         	pins.digitalWritePin(DigitalPin.P6, 1);
+        	pins.digitalWritePin(DigitalPin.P7, 0);
+        }
+        //purple 
+        else if(rgb==16711935){
+        	pins.digitalWritePin(DigitalPin.P9, 1);
+        	pins.digitalWritePin(DigitalPin.P6, 0);
         	pins.digitalWritePin(DigitalPin.P7, 0);
         }
         //turquoise
