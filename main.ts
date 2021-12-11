@@ -1006,9 +1006,9 @@ namespace CodeRorver {
         // updateLEDs();
         //red--actuall purple 
         if(rgb==16711680){
-        	pins.digitalWritePin(DigitalPin.P9, 0);
+        	pins.digitalWritePin(DigitalPin.P9, 1);
         	pins.digitalWritePin(DigitalPin.P6, 1);
-        	pins.digitalWritePin(DigitalPin.P7, 1);
+        	pins.digitalWritePin(DigitalPin.P7, 0);
 
         }
         //Green -- correct 
