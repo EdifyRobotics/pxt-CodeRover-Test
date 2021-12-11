@@ -1004,7 +1004,7 @@ namespace CodeRorver {
 
         // fire().setBand(rgb);
         // updateLEDs();
-        //red--actuall purple 
+        //red 
         if(rgb==16711680){
         	pins.digitalWritePin(DigitalPin.P9, 1);
         	pins.digitalWritePin(DigitalPin.P6, 1);
@@ -1017,17 +1017,17 @@ namespace CodeRorver {
         	pins.digitalWritePin(DigitalPin.P6, 0);
         	pins.digitalWritePin(DigitalPin.P7, 1);
         } 
-        //blue -- actually turquoise
+        //blue 
         else if(rgb==255){
-        	pins.digitalWritePin(DigitalPin.P9, 1);
-        	pins.digitalWritePin(DigitalPin.P6, 1);
-        	pins.digitalWritePin(DigitalPin.P7, 0);
-        }
-        //yellow -- this is red....
-        else if(rgb==16776960){
         	pins.digitalWritePin(DigitalPin.P9, 0);
-        	pins.digitalWritePin(DigitalPin.P6, 0);
+        	pins.digitalWritePin(DigitalPin.P6, 1);
         	pins.digitalWritePin(DigitalPin.P7, 1);
+        }
+        //yellow 
+        else if(rgb==16776960){
+        	pins.digitalWritePin(DigitalPin.P9, 1);
+        	pins.digitalWritePin(DigitalPin.P6, 0);
+        	pins.digitalWritePin(DigitalPin.P7, 0);
         }
         //purple -- 
         else if(rgb==16711935){
@@ -1037,9 +1037,9 @@ namespace CodeRorver {
         }
         //turquoise
         else if(rgb==65535){
-        	pins.digitalWritePin(DigitalPin.P9, 1);
+        	pins.digitalWritePin(DigitalPin.P9, 0);
         	pins.digitalWritePin(DigitalPin.P6, 0);
-        	pins.digitalWritePin(DigitalPin.P7, 0);
+        	pins.digitalWritePin(DigitalPin.P7, 1);
         }
         //white 
         else if(rgb==16777215){
