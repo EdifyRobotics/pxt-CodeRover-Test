@@ -726,7 +726,7 @@ namespace CodeRorver {
     //% duration.shadow=timePicker
     //% speed.min=0 speed.max=100
     export function setLeftMotorSpeed(direction: MotorShaftDirection,speed: number) {
-    	led.enable(false);
+    	// led.enable(false);
 
     	if(direction==MotorShaftDirection.Clockwise){
     		pins.analogWritePin(AnalogPin.P1, 1023-Math.round(1023*speed/100));
@@ -772,7 +772,7 @@ namespace CodeRorver {
     //% speed.min=0 speed.max=100
 
     export function setRightMotorSpeed(direction: MotorShaftDirection,speed: number) {
-    	led.enable(false);
+    	// led.enable(false);
 
     	if(direction==MotorShaftDirection.Clockwise){
     		pins.analogWritePin(AnalogPin.P0, 1023-Math.round(1023*speed/100));
