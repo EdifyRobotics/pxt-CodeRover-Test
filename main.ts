@@ -341,6 +341,7 @@ namespace CodeRorver {
 		                initialSpeed = targetSpeed
 		            }
 		        }
+		        initialSpeed=targetSpeed
 		        //move forward straight 
 		       	if (direction==CodeRoverDriveDirection.Forward){
 		       		if (hall1Count < hall2Count) {
