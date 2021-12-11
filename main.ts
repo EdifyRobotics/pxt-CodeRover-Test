@@ -1004,48 +1004,48 @@ namespace CodeRorver {
 
         // fire().setBand(rgb);
         // updateLEDs();
-        //red
+        //red--actuall purple 
         if(rgb==16711680){
-        	pins.digitalWritePin(DigitalPin.P9, 1);
+        	pins.digitalWritePin(DigitalPin.P9, 0);
         	pins.digitalWritePin(DigitalPin.P6, 0);
-        	pins.digitalWritePin(DigitalPin.P7, 0);
+        	pins.digitalWritePin(DigitalPin.P7, 1);
 
         }
-        //Green
+        //Green -- correct 
         else if(rgb==65280){
-        	pins.digitalWritePin(DigitalPin.P9, 0);
-        	pins.digitalWritePin(DigitalPin.P6, 1);
-        	pins.digitalWritePin(DigitalPin.P7, 0);
-        }
-        //blue
+        	pins.digitalWritePin(DigitalPin.P9, 1);
+        	pins.digitalWritePin(DigitalPin.P6, 0);
+        	pins.digitalWritePin(DigitalPin.P7, 1);
+        } 
+        //blue -- actually turquoise
         else if(rgb==255){
-        	pins.digitalWritePin(DigitalPin.P9, 0);
-        	pins.digitalWritePin(DigitalPin.P6, 0);
-        	pins.digitalWritePin(DigitalPin.P7, 1);
-        }
-        //yellow
-        else if(rgb==16776960){
         	pins.digitalWritePin(DigitalPin.P9, 1);
         	pins.digitalWritePin(DigitalPin.P6, 1);
         	pins.digitalWritePin(DigitalPin.P7, 0);
         }
-        //purple
-        else if(rgb==16711935){
-        	pins.digitalWritePin(DigitalPin.P9, 1);
+        //yellow -- this is red....
+        else if(rgb==16776960){
+        	pins.digitalWritePin(DigitalPin.P9, 0);
         	pins.digitalWritePin(DigitalPin.P6, 0);
         	pins.digitalWritePin(DigitalPin.P7, 1);
+        }
+        //purple -- 
+        else if(rgb==16711935){
+        	pins.digitalWritePin(DigitalPin.P9, 0);
+        	pins.digitalWritePin(DigitalPin.P6, 1);
+        	pins.digitalWritePin(DigitalPin.P7, 0);
         }
         //turquoise
         else if(rgb==65535){
-        	pins.digitalWritePin(DigitalPin.P9, 0);
-        	pins.digitalWritePin(DigitalPin.P6, 1);
-        	pins.digitalWritePin(DigitalPin.P7, 1);
+        	pins.digitalWritePin(DigitalPin.P9, 1);
+        	pins.digitalWritePin(DigitalPin.P6, 0);
+        	pins.digitalWritePin(DigitalPin.P7, 0);
         }
         //white 
         else if(rgb==16777215){
-        	pins.digitalWritePin(DigitalPin.P9, 1);
-        	pins.digitalWritePin(DigitalPin.P6, 1);
-        	pins.digitalWritePin(DigitalPin.P7, 1);
+        	pins.digitalWritePin(DigitalPin.P9, 0);
+        	pins.digitalWritePin(DigitalPin.P6, 0);
+        	pins.digitalWritePin(DigitalPin.P7, 0);
         }
 
     }
