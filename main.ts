@@ -1007,7 +1007,7 @@ namespace CodeRorver {
         //red--actuall purple 
         if(rgb==16711680){
         	pins.digitalWritePin(DigitalPin.P9, 0);
-        	pins.digitalWritePin(DigitalPin.P6, 0);
+        	pins.digitalWritePin(DigitalPin.P6, 1);
         	pins.digitalWritePin(DigitalPin.P7, 1);
 
         }
