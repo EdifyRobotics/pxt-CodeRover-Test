@@ -1006,21 +1006,21 @@ namespace CodeRorver {
         // updateLEDs();
         //red 
         if(rgb==16711680){
-        	pins.digitalWritePin(DigitalPin.P9, 1);
-        	pins.digitalWritePin(DigitalPin.P6, 1);
-        	pins.digitalWritePin(DigitalPin.P7, 0);
+        	pins.digitalWritePin(DigitalPin.P9, 1); //b
+        	pins.digitalWritePin(DigitalPin.P6, 1); //g
+        	pins.digitalWritePin(DigitalPin.P7, 0); //r
 
         }
-        //Green -- correct 
-        else if(rgb==65280){
-        	pins.digitalWritePin(DigitalPin.P9, 1);
-        	pins.digitalWritePin(DigitalPin.P6, 0);
-        	pins.digitalWritePin(DigitalPin.P7, 1);
-        } 
         //blue 
-        else if(rgb==255){
+        else if(rgb==65280){
         	pins.digitalWritePin(DigitalPin.P9, 0);
         	pins.digitalWritePin(DigitalPin.P6, 1);
+        	pins.digitalWritePin(DigitalPin.P7, 1);
+        } 
+        //green 
+        else if(rgb==255){
+        	pins.digitalWritePin(DigitalPin.P9, 1);
+        	pins.digitalWritePin(DigitalPin.P6, 0);
         	pins.digitalWritePin(DigitalPin.P7, 1);
         }
         //yellow 
