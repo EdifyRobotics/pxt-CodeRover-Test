@@ -210,7 +210,7 @@ namespace CodeRorver {
 	        hall2Triggered=false
 	    }
 	    else{
-	    	if (input.runningTime() - lastEndTime >= 50) {
+	    	if (input.runningTime() - lastEndTime >= 10) {
 		        if (initialSpeed < targetSpeed) {
 		            initialSpeed = initialSpeed + 1
 		            if (initialSpeed > targetSpeed) {
@@ -461,7 +461,7 @@ namespace CodeRorver {
     let turnSpeed=50
    	let keepTurning=false
    	function turnRobot(turnChoice:CodeRoverTurnDirection, degree:number){
-   		if (input.runningTime() - lastEndTime >= 20) {
+   		if (input.runningTime() - lastEndTime >= 50) {
    			// counting hall sensor 60 times each side adds up to 90 degrees. 
    			//240 IS 360 degrees. use 240/
 	        if (hall1Count + hall2Count < 3840*(degree/360)) {
