@@ -406,6 +406,8 @@ namespace CodeRorver {
 			            if (slowerSpeed < 0) {
 			                slowerSpeed = 10
 			            }
+			            fasterSpeed=20
+			            slowerSpeed=0
 			            
 			            // left side counter-clockwise
 			            pins.analogWritePin(AnalogPin.P0, Math.round(1023 * fasterSpeed / 100))
@@ -426,6 +428,8 @@ namespace CodeRorver {
 			            if (slowerSpeed < 0) {
 			                slowerSpeed = 10
 			            }
+			            fasterSpeed=20
+			            slowerSpeed=0
 			            
 			            // left side counter-clockwise
 			            pins.analogWritePin(AnalogPin.P0, Math.round(1023 * slowerSpeed / 100))
