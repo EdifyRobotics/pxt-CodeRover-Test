@@ -462,7 +462,7 @@ namespace CodeRorver {
     let turnSpeed=50
    	let keepTurning=false
    	function turnRobot(turnChoice:CodeRoverTurnDirection, degree:number){
-   		if (input.runningTime() - turnLastEndTime >= 50) {
+   		if (input.runningTime() - turnLastEndTime >= 10) {
    			// counting hall sensor 60 times each side adds up to 90 degrees. 
    			//240 IS 360 degrees. use 240/
 	        if (hall1Count + hall2Count < 3800*(degree/360)) {
@@ -576,6 +576,9 @@ namespace CodeRorver {
 
 	            //stop turning 
 	            keepTurning=false 
+	            hall1Count=0
+	            hall2Count=0
+	            turnLastEndTime=0
 	        }
 	        turnLastEndTime = input.runningTime()
 	    }
@@ -607,7 +610,7 @@ namespace CodeRorver {
     	//need to check for hall sensor 
     	//to make sure its turning the correct degree 
     	// 让电机不转p6,p7是与led共用
-		led.enable(false)
+		// led.enable(false)
 		// 霍尔需要先设定p5,p11的pull，防止两个pin是随机电压？
 		pins.setPull(DigitalPin.P5, PinPullMode.PullDown)
 		pins.setPull(DigitalPin.P11, PinPullMode.PullDown)
