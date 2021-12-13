@@ -337,7 +337,7 @@ namespace CodeRorver {
     		//ultrasound checks every 30ms, drive function works best if its called every 10ms. 
 	    	if (input.runningTime() - lastEndTime >= 10) {
 		        if (initialSpeed < targetSpeed) {
-		            initialSpeed = initialSpeed + 1
+		            initialSpeed = initialSpeed + 4
 		            if (initialSpeed > targetSpeed) {
 		                initialSpeed = targetSpeed
 		            }
@@ -890,7 +890,7 @@ namespace CodeRorver {
 
 	//potential bug: turns to the right after a while 
 	export function getUltrasoundSensorValue(unit: PingUnit, maxCmDistance = 500): number {
-		if (input.runningTime() - sonarLastEndTime >= 2000) { // pause 30ms before next call
+		if (input.runningTime() - sonarLastEndTime >= 30) { // pause 30ms before next call
 
 
 
