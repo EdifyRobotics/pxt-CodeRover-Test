@@ -463,8 +463,8 @@ namespace CodeRorver {
    	function turnRobot(turnChoice:CodeRoverTurnDirection, degree:number){
    		if (input.runningTime() - lastEndTime >= 50) {
    			// counting hall sensor 60 times each side adds up to 90 degrees. 
-   			//480 is 360 degrees. use 480/
-	        if (hall1Count + hall2Count < 960*(degree/360)) {
+   			//240 IS 360 degrees. use 240/
+	        if (hall1Count + hall2Count < 240*(degree/360)) {
 	            if (turnChoice == CodeRoverTurnDirection.Right) {
 	                if (hall1Count < hall2Count) {
 	                    fasterSpeed = turnSpeed + pValue * (hall2Count - hall1Count)
