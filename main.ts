@@ -464,7 +464,7 @@ namespace CodeRorver {
    		if (input.runningTime() - lastEndTime >= 50) {
    			// counting hall sensor 60 times each side adds up to 90 degrees. 
    			//240 IS 360 degrees. use 240/
-	        if (hall1Count + hall2Count < 3840*(degree/360)) {
+	        if (hall1Count + hall2Count < 3800*(degree/360)) {
 	            if (turnChoice == CodeRoverTurnDirection.Left) {
 	                if (hall1Count < hall2Count) {
 	                    fasterSpeed = turnSpeed + pValue * (hall2Count - hall1Count)
@@ -667,6 +667,7 @@ namespace CodeRorver {
     //% speed.min=0 speed.max=100
     //% duration.shadow=timePicker
    	//% group="Direction"
+   	//drive no stop works with while loop
     export function CodeRoverDriveNoStop(direction : CodeRoverDriveDirection, speed:number) {
     	//need too check for hall sensor 
     	//to make sure its going straight 
