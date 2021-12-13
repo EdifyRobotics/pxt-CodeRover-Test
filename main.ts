@@ -337,7 +337,7 @@ namespace CodeRorver {
     		//ultrasound checks every 30ms, drive function works best if its called every 10ms. 
 	    	if (input.runningTime() - lastEndTime >= 10) {
 		        if (initialSpeed < targetSpeed) {
-		            initialSpeed = initialSpeed + 4
+		            initialSpeed = initialSpeed + 1
 		            if (initialSpeed > targetSpeed) {
 		                initialSpeed = targetSpeed
 		            }
