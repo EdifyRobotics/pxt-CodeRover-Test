@@ -458,14 +458,14 @@ namespace CodeRorver {
 
 
     //turning 
-    let turnSpeed=30
+    let turnSpeed=50
    	let keepTurning=false
    	function turnRobot(turnChoice:CodeRoverTurnDirection, degree:number){
    		if (input.runningTime() - lastEndTime >= 20) {
    			// counting hall sensor 60 times each side adds up to 90 degrees. 
    			//240 IS 360 degrees. use 240/
 	        if (hall1Count + hall2Count < 480*(degree/360)) {
-	            if (turnChoice == CodeRoverTurnDirection.Right) {
+	            if (turnChoice == CodeRoverTurnDirection.Left) {
 	                if (hall1Count < hall2Count) {
 	                    fasterSpeed = turnSpeed + pValue * (hall2Count - hall1Count)
 	                    slowerSpeed = turnSpeed - pValue * (hall2Count - hall1Count)
@@ -514,7 +514,7 @@ namespace CodeRorver {
 	                    // pins.digitalWritePin(DigitalPin.P3, 0)
 	                    // pins.digitalWritePin(DigitalPin.P9, 0)
 	                }
-	            } else if (turnChoice == CodeRoverTurnDirection.Left) {
+	            } else if (turnChoice == CodeRoverTurnDirection.Right) {
 	                if (hall1Count < hall2Count) {
 	                    fasterSpeed = turnSpeed + pValue * (hall2Count - hall1Count)
 	                    slowerSpeed = turnSpeed - pValue * (hall2Count - hall1Count)
