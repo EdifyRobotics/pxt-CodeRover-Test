@@ -334,7 +334,7 @@ namespace CodeRorver {
 
     		//drive robot nonestop function nest within ultrasound sensor check value function 
     		//ultrasound checks every 30ms, drive function works best if its called every 10ms. 
-	    	if (input.runningTime() - lastEndTime >= 50) {
+	    	if (input.runningTime() - lastEndTime >= 10) {
 		        if (initialSpeed < targetSpeed) {
 		            initialSpeed = initialSpeed + 1
 		            if (initialSpeed > targetSpeed) {
