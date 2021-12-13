@@ -164,6 +164,7 @@ namespace CodeRorver {
 	let startDriveTime=0 //this keeps track of duration
 	let lastEndTime = 0 //this keeps track of how often driveRobot function will compare 2 hall sensor counts. 
 	let sonarLastEndTime=0//checks sonar value every 10ms 
+	let turnLastEndTime=0
 
 	initialSpeed = 0 //initial speed will increase to user inputed target speed. 
 
@@ -461,7 +462,7 @@ namespace CodeRorver {
     let turnSpeed=50
    	let keepTurning=false
    	function turnRobot(turnChoice:CodeRoverTurnDirection, degree:number){
-   		if (input.runningTime() - lastEndTime >= 50) {
+   		if (input.runningTime() - turnLastEndTime >= 50) {
    			// counting hall sensor 60 times each side adds up to 90 degrees. 
    			//240 IS 360 degrees. use 240/
 	        if (hall1Count + hall2Count < 3800*(degree/360)) {
@@ -576,7 +577,7 @@ namespace CodeRorver {
 	            //stop turning 
 	            keepTurning=false 
 	        }
-	        lastEndTime = input.runningTime()
+	        turnLastEndTime = input.runningTime()
 	    }
    	}
 
@@ -611,6 +612,10 @@ namespace CodeRorver {
 		pins.setPull(DigitalPin.P5, PinPullMode.PullDown)
 		pins.setPull(DigitalPin.P11, PinPullMode.PullDown)
 		pValue=turnSpeed/(turnSpeed*0.3)
+
+		hall1Count=0
+   		hall2Count=0
+   		turnLastEndTime=0
 
 		callTurningFunction(degree,turnChoice,true)
     }
