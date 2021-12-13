@@ -344,7 +344,7 @@ namespace CodeRorver {
 		        }
 		        // initialSpeed=targetSpeed
 		        //move forward straight 
-		       	if (direction==CodeRoverDriveDirection.Backward){
+		       	if (direction==CodeRoverDriveDirection.Forward){
 		       		if (hall1Count < hall2Count) {
 			            fasterSpeed = initialSpeed + pValue * (hall2Count - hall1Count)
 			            slowerSpeed = initialSpeed - pValue * (hall2Count - hall1Count)
@@ -396,7 +396,7 @@ namespace CodeRorver {
 			        }
 		       	}
 		       	//move backward straight
-		       	else if(direction==CodeRoverDriveDirection.Forward){
+		       	else if(direction==CodeRoverDriveDirection.Backward){
 		       		if (hall1Count < hall2Count) {
 			            fasterSpeed = initialSpeed + pValue * (hall2Count - hall1Count)
 			            slowerSpeed = initialSpeed - pValue * (hall2Count - hall1Count)
