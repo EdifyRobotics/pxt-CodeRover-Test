@@ -524,7 +524,7 @@ namespace CodeRorver {
 	                    // pins.digitalWritePin(DigitalPin.P9, 0)
 	                }
 	            } else if (turnChoice == CodeRoverTurnDirection.Right) {
-	                if (hall1Count < hall2Count) {
+	                if (hall1Count > hall2Count) {
 	                    fasterSpeed = turnSpeed + pValue * (hall2Count - hall1Count)
 	                    slowerSpeed = turnSpeed - pValue * (hall2Count - hall1Count)
 	                    if (fasterSpeed > 70) {
@@ -542,7 +542,7 @@ namespace CodeRorver {
 	                    pins.digitalWritePin(DigitalPin.P15, 1)
 	                    // pins.digitalWritePin(DigitalPin.P3, 0)
 	                    // pins.digitalWritePin(DigitalPin.P9, 1)
-	                } else if (hall1Count > hall2Count) {
+	                } else if (hall1Count < hall2Count) {
 	                    // right side slower
 	                    fasterSpeed = turnSpeed + pValue * (hall1Count - hall2Count)
 	                    slowerSpeed = turnSpeed - pValue * (hall1Count - hall2Count)
