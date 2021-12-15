@@ -136,6 +136,24 @@
 	}
 
 
+	enum LightPins {
+	    
+	    //% block="left"
+	    left,
+
+	    //% block="right"
+	    right
+	}
+
+	enum LightValue
+	{
+		//% block=dark enumval=0
+
+	    dark,
+
+		//% block=light enumval=1
+	    light,
+	}
 
 
 
@@ -1020,6 +1038,52 @@ namespace CodeRorver {
 		}
 
 	}
+
+
+
+
+	//digital sensor that has 3 pins can connect to
+	/**
+	* read left and right light sensor value returns true or false based on selection.
+	* @param choose to read value from left or right light sensor
+	* @param choose the light sensor state, light or dark
+	*/
+	//% block="%LightChoice Light sensor value is %LightValueChoice"
+	//% LightValueChoice.default=LightValue.dark
+	//% color="#6fa8dc"
+	//% group="Sensor Controls"
+
+	export function checkLightSensor(LightChoice: LightPins, LightValueChoice:LightValue): boolean {
+
+		if(LightChoice==LightPins.left){
+			if(pins.digitalReadPin(DigitalPin.P2)==1 && LightValueChoice==LightValue.light){
+				return true
+			}
+			else if(pins.digitalReadPin(DigitalPin.P2)==0 && LightValueChoice==LightValue.dark){
+				return true
+			}
+			else{
+				return false 
+			}
+		}
+		else if(LightChoice==LightPins.right){
+			if(pins.digitalReadPin(DigitalPin.P3)==1 && LightValueChoice==LightValue.light){
+				return true
+			}
+			else if(pins.digitalReadPin(DigitalPin.P3)==0 && LightValueChoice==LightValue.dark){
+				return true
+			}
+			else{
+				return false 
+			}
+		}
+		else{
+			return false
+		}
+
+	}
+
+
 
 
 	/**
