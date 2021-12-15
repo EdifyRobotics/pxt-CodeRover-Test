@@ -1056,10 +1056,10 @@ namespace CodeRorver {
 	export function checkLightSensor(LightChoice: LightPins, LightValueChoice:LightValue): boolean {
 
 		if(LightChoice==LightPins.left){
-			if(pins.digitalReadPin(DigitalPin.P2)==1 && LightValueChoice==LightValue.light){
+			if(pins.digitalReadPin(DigitalPin.P2)==0 && LightValueChoice==LightValue.light){
 				return true
 			}
-			else if(pins.digitalReadPin(DigitalPin.P2)==0 && LightValueChoice==LightValue.dark){
+			else if(pins.digitalReadPin(DigitalPin.P2)==1 && LightValueChoice==LightValue.dark){
 				return true
 			}
 			else{
@@ -1067,10 +1067,10 @@ namespace CodeRorver {
 			}
 		}
 		else if(LightChoice==LightPins.right){
-			if(pins.digitalReadPin(DigitalPin.P3)==1 && LightValueChoice==LightValue.light){
+			if(pins.digitalReadPin(DigitalPin.P3)==0 && LightValueChoice==LightValue.light){
 				return true
 			}
-			else if(pins.digitalReadPin(DigitalPin.P3)==0 && LightValueChoice==LightValue.dark){
+			else if(pins.digitalReadPin(DigitalPin.P3)==1 && LightValueChoice==LightValue.dark){
 				return true
 			}
 			else{
