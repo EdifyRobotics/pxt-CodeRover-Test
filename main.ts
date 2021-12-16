@@ -155,6 +155,24 @@
 	    light,
 	}
 
+	enum SoundPins {
+	    
+	    //% block="left"
+	    left,
+
+	    //% block="right"
+	    right
+	}
+
+	enum SoundValue
+	{
+		//% block=quiet enumval=0
+
+	    quiet,
+
+		//% block=loud enumval=1
+	    loud,
+	}
 
 
 
@@ -1083,6 +1101,47 @@ namespace CodeRorver {
 
 	}
 
+
+	//digital sensor that has 3 pins can connect to
+	/**
+	* read left and right sound sensor value returns true or false based on selection.
+	* @param choose to read value from left or right sound sensor
+	* @param choose the sound sensor state, loud or quiet
+	*/
+	//% block="%SoundChoice Sound sensor value is %SoundValueChoice"
+	//% SoundValueChoice.default=SoundValue.quiet
+	//% color="#6fa8dc"
+	//% group="Sensor Controls"
+
+	export function checkSoundSensor(SoundChoice: SoundPins, SoundValueChoice:SoundValue): boolean {
+
+		if(SoundChoice==SoundPins.left){
+			if(pins.digitalReadPin(DigitalPin.P2)==0 && SoundValueChoice==SoundValue.loud){
+				return true
+			}
+			else if(pins.digitalReadPin(DigitalPin.P2)==1 && SoundValueChoice==SoundValue.quiet){
+				return true
+			}
+			else{
+				return false 
+			}
+		}
+		else if(SoundChoice==SoundPins.right){
+			if(pins.digitalReadPin(DigitalPin.P3)==0 && SoundValueChoice==SoundValue.loud){
+				return true
+			}
+			else if(pins.digitalReadPin(DigitalPin.P3)==1 && SoundValueChoice==SoundValue.quiet){
+				return true
+			}
+			else{
+				return false 
+			}
+		}
+		else{
+			return false
+		}
+
+	}
 
 
 
