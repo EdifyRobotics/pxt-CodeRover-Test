@@ -517,7 +517,7 @@ namespace CodeRorver {
 
 
     //turning 
-    let turnSpeed=50
+    let turnSpeed=100
    	let keepTurning=false
    	function turnRobot(turnChoice:CodeRoverTurnDirection, degree:number){
    		if (input.runningTime() - turnLastEndTime >= 10) {
@@ -528,11 +528,11 @@ namespace CodeRorver {
 	                if (hall1Count < hall2Count) {
 	                    fasterSpeed = turnSpeed + pValue * (hall2Count - hall1Count)
 	                    slowerSpeed = turnSpeed - pValue * (hall2Count - hall1Count)
-	                    if (fasterSpeed > 70) {
-	                        fasterSpeed = 70
+	                    if (fasterSpeed > 100) {
+	                        fasterSpeed = 100
 	                    }
 	                    if (slowerSpeed < 0) {
-	                        slowerSpeed = 10
+	                        slowerSpeed = 50
 	                    }
 	                    // p0p6 is faster than p1p7, p0p6 slow down
 	                    // right side clockwise
@@ -547,11 +547,11 @@ namespace CodeRorver {
 	                    // right side slower
 	                    fasterSpeed = turnSpeed + pValue * (hall1Count - hall2Count)
 	                    slowerSpeed = turnSpeed - pValue * (hall1Count - hall2Count)
-	                    if (fasterSpeed > 70) {
-	                        fasterSpeed = 70
+	                    if (fasterSpeed > 100) {
+	                        fasterSpeed = 100
 	                    }
 	                    if (slowerSpeed < 0) {
-	                        slowerSpeed = 10
+	                        slowerSpeed = 50
 	                    }
 	                    // p0p6 is slower than p1p7, p0p6 speed up
 	                    // right side clockwise
@@ -577,11 +577,11 @@ namespace CodeRorver {
 	                if (hall1Count > hall2Count) {
 	                    fasterSpeed = turnSpeed + pValue * (hall2Count - hall1Count)
 	                    slowerSpeed = turnSpeed - pValue * (hall2Count - hall1Count)
-	                    if (fasterSpeed > 70) {
-	                        fasterSpeed = 70
+	                    if (fasterSpeed > 100) {
+	                        fasterSpeed = 100
 	                    }
 	                    if (slowerSpeed < 0) {
-	                        slowerSpeed = 10
+	                        slowerSpeed = 50
 	                    }
 	                    // p0p6 is faster than p1p7, p0p6 slow down
 	                    // right side clockwise
@@ -596,11 +596,11 @@ namespace CodeRorver {
 	                    // right side slower
 	                    fasterSpeed = turnSpeed + pValue * (hall1Count - hall2Count)
 	                    slowerSpeed = turnSpeed - pValue * (hall1Count - hall2Count)
-	                    if (fasterSpeed > 70) {
-	                        fasterSpeed = 70
+	                    if (fasterSpeed > 100) {
+	                        fasterSpeed = 100
 	                    }
 	                    if (slowerSpeed < 0) {
-	                        slowerSpeed = 10
+	                        slowerSpeed = 50
 	                    }
 	                    // p0p6 is slower than p1p7, p0p6 speed up
 	                    // right side clockwise
