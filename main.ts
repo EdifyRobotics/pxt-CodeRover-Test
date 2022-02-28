@@ -355,7 +355,7 @@ namespace CodeRorver {
 			            pins.digitalWritePin(DigitalPin.P15, 1)
 			        } else {
 			            
-			            // left side counter-clockwise
+			           	// left side counter-clockwise
 			            pins.analogWritePin(AnalogPin.P0, Math.round(1023 * initialSpeed / 100))
 			            pins.digitalWritePin(DigitalPin.P14, 0)
 			            // pins.digitalWritePin(DigitalPin.P3, 0)
