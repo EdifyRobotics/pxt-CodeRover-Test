@@ -797,12 +797,12 @@ namespace CodeRorver {
     	// led.enable(false);
 
     	if(direction==MotorShaftDirection.CounterClockwise){
-    		pins.analogWritePin(AnalogPin.P0, Math.round(1023*(1-speed/100-0.1)));
+    		pins.analogWritePin(AnalogPin.P0, Math.round(1023*(1-speed/100)));
 			pins.digitalWritePin(DigitalPin.P14, 1);
 
     	}
     	else if(direction==MotorShaftDirection.Clockwise){
-    		pins.analogWritePin(AnalogPin.P0,  Math.round(1023*((speed/100)-0.6)));
+    		pins.analogWritePin(AnalogPin.P0,  Math.round(1023*((speed*0.8/100))));
 			pins.digitalWritePin(DigitalPin.P14, 0);
 
     	}
@@ -843,12 +843,12 @@ namespace CodeRorver {
     	// led.enable(false);
 
     	if(direction==MotorShaftDirection.CounterClockwise){
-    		pins.analogWritePin(AnalogPin.P1, Math.round(1023*(1-speed/100-0.1)));
+    		pins.analogWritePin(AnalogPin.P1, Math.round(1023*(1-speed/100)));
 			pins.digitalWritePin(DigitalPin.P15, 1);
 
     	}
     	else if(direction==MotorShaftDirection.Clockwise){
-    		pins.analogWritePin(AnalogPin.P1,  Math.round(1023*((speed/100)-0.6)));
+    		pins.analogWritePin(AnalogPin.P1,  Math.round(1023*((speed*0.8/100))));
 			pins.digitalWritePin(DigitalPin.P15, 0);
 
     	}
