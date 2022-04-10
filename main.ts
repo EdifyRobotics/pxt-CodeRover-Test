@@ -802,7 +802,7 @@ namespace CodeRorver {
 
     	}
     	else if(direction==MotorShaftDirection.Clockwise){
-    		pins.analogWritePin(AnalogPin.P0,  Math.round(1023*((speed/100)-0.1)));
+    		pins.analogWritePin(AnalogPin.P0,  Math.round(1023*((speed/100)-0.2)));
 			pins.digitalWritePin(DigitalPin.P14, 0);
 
     	}
@@ -848,7 +848,7 @@ namespace CodeRorver {
 
     	}
     	else if(direction==MotorShaftDirection.Clockwise){
-    		pins.analogWritePin(AnalogPin.P1,  Math.round(1023*((speed/100)-0.1)));
+    		pins.analogWritePin(AnalogPin.P1,  Math.round(1023*((speed/100)-0.2)));
 			pins.digitalWritePin(DigitalPin.P15, 0);
 
     	}
