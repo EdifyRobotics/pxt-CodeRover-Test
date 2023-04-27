@@ -734,7 +734,7 @@ namespace CodeRorver {
     //% speed.min=0 speed.max=100
     //% duration.shadow=timePicker
    	//% group="Direction"
-   	//drive no stop works with while loop
+   	//*drive no stop works with while loop*//
     export function CodeRoverDriveNoStop(direction : CodeRoverDriveDirection, speed:number) {
     	//need too check for hall sensor 
     	//to make sure its going straight 
