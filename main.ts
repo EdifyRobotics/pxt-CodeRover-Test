@@ -384,13 +384,13 @@ namespace CodeRorver {
     		//drive robot nonestop function nest within ultrasound sensor check value function 
     		//ultrasound checks every 30ms, drive function works best if its called every 10ms. 
 	    	if (input.runningTime() - lastEndTime >= 10) {
-		        // if (initialSpeed < targetSpeed) {
-		        //     initialSpeed = initialSpeed + 1
-		        //     if (initialSpeed > targetSpeed) {
-		        //         initialSpeed = targetSpeed
-		        //     }
-		        // }
-		        initialSpeed=targetSpeed
+		        if (initialSpeed < targetSpeed) {
+		            initialSpeed = initialSpeed + 1
+		            if (initialSpeed > targetSpeed) {
+		                initialSpeed = targetSpeed
+		            }
+		        }
+		        // initialSpeed=targetSpeed
 		        //move forward straight 
 		       	if (direction==CodeRoverDriveDirection.Backward){
 		       		if (hall1Count < hall2Count) {
@@ -739,8 +739,10 @@ namespace CodeRorver {
     	//need too check for hall sensor 
     	//to make sure its going straight 
     	// 让电机不转p6,p7是与led共用
-		// led.enable(false)
+		led.enable(false)
 		// 霍尔需要先设定p5,p11的pull，防止两个pin是随机电压？
+		pins.setPull(DigitalPin.P5, PinPullMode.PullDown)
+		pins.setPull(DigitalPin.P11, PinPullMode.PullDown)
 		pValue=speed/(speed*0.3)
 
 		canDriveRobotNoStop=true
