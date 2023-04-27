@@ -255,7 +255,7 @@ namespace CodeRorver {
 		            }
 		        }
 		        //move forward straight 
-		       	if (direction==CodeRoverDriveDirection.Forward){
+		       	if (direction==CodeRoverDriveDirection.Backward){
 		       		if (hall1Count < hall2Count) {
 			            fasterSpeed = initialSpeed + pValue * (hall2Count - hall1Count)
 			            slowerSpeed = initialSpeed - pValue * (hall2Count - hall1Count)
@@ -307,7 +307,7 @@ namespace CodeRorver {
 			        }
 		       	}
 		       	//move backward straight
-		       	else if(direction==CodeRoverDriveDirection.Backward){
+		       	else if(direction==CodeRoverDriveDirection.Forward){
 		       		if (hall1Count < hall2Count) {
 			            fasterSpeed = initialSpeed + pValue * (hall2Count - hall1Count)
 			            slowerSpeed = initialSpeed - pValue * (hall2Count - hall1Count)
@@ -380,6 +380,7 @@ namespace CodeRorver {
     //drive robot nonestop 
     function driveRobotNoStop (direction:number, targetSpeed:number, pValue:number) {
 
+
     		//drive robot nonestop function nest within ultrasound sensor check value function 
     		//ultrasound checks every 30ms, drive function works best if its called every 10ms. 
 	    	if (input.runningTime() - lastEndTime >= 10) {
@@ -389,9 +390,8 @@ namespace CodeRorver {
 		                initialSpeed = targetSpeed
 		            }
 		        }
-		        // initialSpeed=targetSpeed
 		        //move forward straight 
-		       	if (direction==CodeRoverDriveDirection.Forward){
+		       	if (direction==CodeRoverDriveDirection.Backward){
 		       		if (hall1Count < hall2Count) {
 			            fasterSpeed = initialSpeed + pValue * (hall2Count - hall1Count)
 			            slowerSpeed = initialSpeed - pValue * (hall2Count - hall1Count)
@@ -401,7 +401,7 @@ namespace CodeRorver {
 			                fasterSpeed = 70
 			            }
 			            if (slowerSpeed < 0) {
-			                slowerSpeed = 30
+			                slowerSpeed = 10
 			            }
 			            // p0p6 is faster than p1p7, p0p6 slow down
 			            pins.analogWritePin(AnalogPin.P0, 1023 - Math.round(1023 * slowerSpeed / 100))
@@ -421,7 +421,7 @@ namespace CodeRorver {
 			                fasterSpeed = 70
 			            }
 			            if (slowerSpeed < 0) {
-			                slowerSpeed = 30
+			                slowerSpeed = 10
 			            }
 			            // p0p6 is slower than p1p7, p0p6 speed up
 			            pins.analogWritePin(AnalogPin.P0, 1023 - Math.round(1023 * fasterSpeed / 100))
@@ -443,8 +443,8 @@ namespace CodeRorver {
 			        }
 		       	}
 		       	//move backward straight
-		       	else if(direction==CodeRoverDriveDirection.Backward){
-		       		if (hall1Count > hall2Count) {
+		       	else if(direction==CodeRoverDriveDirection.Forward){
+		       		if (hall1Count < hall2Count) {
 			            fasterSpeed = initialSpeed + pValue * (hall2Count - hall1Count)
 			            slowerSpeed = initialSpeed - pValue * (hall2Count - hall1Count)
 			            if (fasterSpeed > 70) { //limit max speed to 70% and min speed to 10%
@@ -468,7 +468,7 @@ namespace CodeRorver {
 
 			            // pins.digitalWritePin(DigitalPin.P3, 0)
 			            // pins.digitalWritePin(DigitalPin.P9, 1)
-			        } else if (hall1Count < hall2Count) {
+			        } else if (hall1Count > hall2Count) {
 			            // right side slower
 			            fasterSpeed = initialSpeed + pValue * (hall1Count - hall2Count)
 			            slowerSpeed = initialSpeed - pValue * (hall1Count - hall2Count)
@@ -491,7 +491,7 @@ namespace CodeRorver {
 			            pins.digitalWritePin(DigitalPin.P15, 1)
 			        } else {
 			            
-			            // left side counter-clockwise
+			           	// left side counter-clockwise
 			            pins.analogWritePin(AnalogPin.P0, Math.round(1023 * initialSpeed / 100))
 			            pins.digitalWritePin(DigitalPin.P14, 0)
 			            // pins.digitalWritePin(DigitalPin.P3, 0)
