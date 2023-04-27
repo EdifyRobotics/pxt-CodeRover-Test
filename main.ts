@@ -401,7 +401,7 @@ namespace CodeRorver {
 			                fasterSpeed = 70
 			            }
 			            if (slowerSpeed < 0) {
-			                slowerSpeed = 10
+			                slowerSpeed = 50
 			            }
 			            // p0p6 is faster than p1p7, p0p6 slow down
 			            pins.analogWritePin(AnalogPin.P0, 1023 - Math.round(1023 * slowerSpeed / 100))
@@ -421,7 +421,7 @@ namespace CodeRorver {
 			                fasterSpeed = 70
 			            }
 			            if (slowerSpeed < 0) {
-			                slowerSpeed = 10
+			                slowerSpeed = 50
 			            }
 			            // p0p6 is slower than p1p7, p0p6 speed up
 			            pins.analogWritePin(AnalogPin.P0, 1023 - Math.round(1023 * fasterSpeed / 100))
